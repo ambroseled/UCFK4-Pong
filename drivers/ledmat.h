@@ -4,7 +4,7 @@
     @brief  LED matrix driver.
 
     @defgroup ledmat LED matrix driver
-       
+
     This module implements a simple hardware abstraction of a LED matrix.
 */
 #ifndef LEDMAT_H
