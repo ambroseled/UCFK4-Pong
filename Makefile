@@ -16,7 +16,7 @@ all: testing.out
 
 
 # Compile: create object files from C source files.
-testing.o: testing.c drivers/ledmat.h drivers/avr/system.h
+testing.o: testing.c drivers/ledmat.h drivers/avr/system.h drivers/navswitch.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 system.o: drivers/avr/system.c drivers/avr/system.h
@@ -29,8 +29,12 @@ ledmat.o: drivers/ledmat.c drivers/ledmat.h  drivers/avr/pio.h drivers/avr/syste
 	$(CC) -c $(CFLAGS) $< -o $@
 
 
+navswitch.o: drivers/navswitch.c drivers/avr/delay.h drivers/avr/pio.h drivers/avr/system.h drivers/navswitch.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+
 # Link: create ELF output file from object files.
-testing.out: testing.o system.o ledmat.o pio.o
+testing.out: testing.o system.o ledmat.o pio.o navswitch.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 
