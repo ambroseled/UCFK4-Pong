@@ -102,7 +102,7 @@ void displayLoss(void) {
 int main(void) {
     game_init();
     tiny_init();
-    //TODO Sort y is implict dec
+    //TODO Sort y this is an implict declaration
     show_welcome();
 
 
@@ -112,7 +112,7 @@ int main(void) {
         if (game_state == NOT_STARTED) {
             button_update();
             if (button_push_event_p(0)) {
-                tinygl_clear();
+                clearDisplay();
                 game_state = PLAYING;
             }
         } else if (game_state == PLAYING) {
@@ -122,6 +122,7 @@ int main(void) {
             paddle_task();
         } else {
             //TODO Variable that is shared that shows who won
+            //TODO Change to a re-play message and wait for button press
         }
 
         tinygl_update();
