@@ -23,6 +23,7 @@ paddle.o: paddle.c drivers/avr/system.h utils/tinygl.h drivers/navswitch.h utils
 	$(CC) -c $(CFLAGS) $< -o $@
 
 welcome.o: welcome.c utils/tinygl.h welcome.h
+	$(CC) -c $(CFLAGS) $< -o $@
 
 pio.o: drivers/avr/pio.c drivers/avr/pio.h drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
