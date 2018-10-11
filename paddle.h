@@ -1,9 +1,12 @@
 /**
+* Paddle module header
+* @team 128
+* @author Ambrose Ledbrook - 79172462
 *
-*
-*
-*
+* This module provides the functionality of the players paddle
 */
+
+
 #ifndef PADDLE_H
 #define PADDLE_H
 
@@ -16,6 +19,9 @@
 // Defining constants used for the edges of the board
 #define MAX_LEFT 6
 #define MAX_RIGHT 0
+
+
+#endif
 
 
 /**
@@ -46,6 +52,3 @@ void paddle_show(void);
 * NAVSWITCH_SOUTH navswitch_push_event_p.
 */
 void paddle_move(void);
-
-
-#endif

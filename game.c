@@ -10,7 +10,7 @@
 #include "pacer.h"
 #include "paddle.h"
 #include "messages.h"
-#include "fonts/font3x5_1.h"
+#include "font3x5_1.h"
 #include "font.h"
 #include "button.h"
 
@@ -43,6 +43,20 @@ typedef enum {
 Game_states game_state;
 uint8_t tick_count = 1;
 
+
+/*
+* Intialises the tinygl module used by the game
+*/
+void tiny_init(void) {
+    // Setting up intial values of the tinygl module
+    tinygl_init (PACER_RATE);
+    tinygl_font_set (&font3x5_1);
+    tinygl_text_speed_set (MESSAGE_RATE);
+    tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
+    tinygl_text_dir_set (TINYGL_TEXT_DIR_ROTATE);
+}
+
+
 /*
 * Intialises the game enviroment and modules used by the game, while also
 * setting the initial state
@@ -56,19 +70,6 @@ void game_init(void) {
     button_init();
     tiny_init();
     game_state = NOT_STARTED;
-}
-
-
-/*
-* Intialises the tinygl module used by the game
-*/
-void tiny_init(void) {
-    // Setting up intial values of the tinygl module
-    tinygl_init (PACER_RATE);
-    tinygl_font_set (&font3x5_1);
-    tinygl_text_speed_set (MESSAGE_RATE);
-    tinygl_text_mode_set (TINYGL_TEXT_MODE_SCROLL);
-    tinygl_text_dir_set (TINYGL_TEXT_DIR_ROTATE);
 }
 
 
@@ -98,20 +99,6 @@ void clear_display(void) {
 
 
 /**
-* Checks if the button is pressed if so the game state is changed to PLAYING
-*/
-static void button_task(void) {
-    button_update();
-    if (button_push_event_p(0)) {
-        // Clearing the display
-        clear_display();
-        // Updating the game state to PLAYING
-        change_states(PLAYING);
-    }
-}
-
-
-/**
 * Changes the state of the game to that of the passed state
 */
 void change_states(Game_states new_state) {
@@ -123,9 +110,25 @@ void change_states(Game_states new_state) {
         case WON :
             show_won();
             break;
-         case LOST :
+        case LOST :
             show_lost();
             break;
+        default :
+            break;
+    }
+}
+
+
+/**
+* Checks if the button is pressed if so the game state is changed to PLAYING
+*/
+static void button_task(void) {
+    button_update();
+    if (button_push_event_p(0)) {
+        // Clearing the display
+        clear_display();
+        // Updating the game state to PLAYING
+        change_states(PLAYING);
     }
 }
 

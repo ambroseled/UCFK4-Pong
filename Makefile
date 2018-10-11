@@ -6,7 +6,7 @@
 
 # Definitions.
 CC = avr-gcc
-CFLAGS = -mmcu=atmega32u2 -Os -Wall -Wstrict-prototypes -Wextra -g -I. -I../../drivers/avr -I../../utils -I../../drivers
+CFLAGS = -mmcu=atmega32u2 -Os -Wall -Wstrict-prototypes -Wextra -g -I. -I../../drivers/avr -I../../utils -I../../drivers -I../../fonts
 OBJCOPY = avr-objcopy
 SIZE = avr-size
 DEL = rm
@@ -20,7 +20,7 @@ all: game.out
 game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h paddle.h ../../utils/pacer.h ../../utils/font.h messages.h ../../drivers/button.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h../../ drivers/navswitch.h ../../utils/tinygl.h
+paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers/navswitch.h paddle.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 messages.o: messages.c ../../utils/tinygl.h messages.h
@@ -55,8 +55,6 @@ timer.o: ../../drivers/avr/timer.c ../../drivers/avr/system.h ../../drivers/avr/
 
 button.o: ../../drivers/button.c ../../drivers/button.h
 	$(CC) -c $(CFLAGS) $< -o $@
-
-
 
 
 # Link: create ELF output file from object files.

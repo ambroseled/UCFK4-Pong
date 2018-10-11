@@ -24,9 +24,3 @@
 *.map
 *.out
 *.hex
-
-/drivers
-/utils
-/fonts
-
-

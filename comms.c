@@ -1,11 +1,13 @@
 /**
-* Comms module
+* Comms module source
 * @team 128
 * @author Ambrose Ledbrook - 79172462
 * @author
 * This module provides the ir communication functionality used by the game
 * to communicate between the two boards
 */
+
+
 #include "ir_uart.h"
 #include "comms.h"
 
