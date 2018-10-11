@@ -1,32 +1,51 @@
+/**
+*
+*
+*
+*
+*/
 #include "system.h"
 #include "tinygl.h"
 #include "pacer.h"
 #include "paddle.h"
-#include "welcome.h"
+#include "messages.h"
 #include "fonts/font3x5_1.h"
 #include "font.h"
 #include "button.h"
+#include "task.h"
 
 
+// Defining rate constants used in the game
 #define PACER_RATE 500
-#define MESSAGE_RATE 10
+
+#define MESSAGE_RATE 15
+
+#define BUTTON_TASK_RATE 100
 
 
+
+/**
+* This enum holds all possible states that the game can be in
+*/
 typedef enum {
     // Before game has started
     NOT_STARTED,
     // Game is being played
     PLAYING,
-    // Game is over
-    GAME_OVER,
-} game_states;
+    // This player won the game
+    WON,
+    // This player lost the game
+    LOST
+} Game_states;
 
 
-game_states game_state;
-
+// Variable holding the current state of the game
+Game_states game_state;
+uint8_t tick_count = 1;
 
 /*
-* Intialises the game enviroment and modules osed by the game
+* Intialises the game enviroment and modules used by the game, while also
+* setting the initial state
 */
 void game_init(void) {
     system_init();
@@ -35,6 +54,7 @@ void game_init(void) {
     paddle_init();
     pacer_init(PACER_RATE);
     button_init();
+    tiny_init();
     game_state = NOT_STARTED;
 }
 
@@ -43,6 +63,7 @@ void game_init(void) {
 * Intialises the tinygl module used by the game
 */
 void tiny_init(void) {
+    // Setting up intial values of the tinygl module
     tinygl_init (PACER_RATE);
     tinygl_font_set (&font3x5_1);
     tinygl_text_speed_set (MESSAGE_RATE);
@@ -70,29 +91,42 @@ void ball_task(void) {
 /*
 * Clears the display of the ledmat
 */
-void clearDisplay(void) {
+void clear_display(void) {
     // Clearing display
     tinygl_clear();
 }
 
 
-/*
-* Displays a winning message to the player
+/**
+* Checks if the button is pressed if so the game state is changed to PLAYING
 */
-void displayWin(void) {
-    clearDisplay();
-    // Displaying message to player
-    tinygl_text("YOU WON!!");
+static void button_task(void) {
+    button_update();
+    if (button_push_event_p(0)) {
+        // Clearing the display
+        clear_display();
+        // Updating the game state to PLAYING
+        change_states(PLAYING);
+    }
 }
 
 
-/*
-* Displays a losing meesage to the player
+/**
+* Changes the state of the game to that of the passed state
 */
-void displayLoss(void) {
-    clearDisplay();
-    // Displaying message to player
-    tinygl_text("YOU LOST :(");
+void change_states(Game_states new_state) {
+    // Updating the state
+    game_state = new_state;
+    // Checking if the current state is now WON or LOST and displaying a
+    // message if so
+    switch (game_state) {
+        case WON :
+            show_won();
+            break;
+         case LOST :
+            show_lost();
+            break;
+    }
 }
 
 
@@ -101,30 +135,26 @@ void displayLoss(void) {
 */
 int main(void) {
     game_init();
-    tiny_init();
-    //TODO Sort y this is an implict declaration
     show_welcome();
 
 
     while(1) {
         pacer_wait();
-
-        if (game_state == NOT_STARTED) {
-            button_update();
-            if (button_push_event_p(0)) {
-                clearDisplay();
-                game_state = PLAYING;
-            }
-        } else if (game_state == PLAYING) {
-
-            //TODO Ball task handled here
-            //ball_task();
-            paddle_task();
-        } else {
-            //TODO Variable that is shared that shows who won
-            //TODO Change to a re-play message and wait for button press
+        //TODO Check for incoming messages
+        switch(game_state) {
+            case WON : // Fall through to NOT_STARTED state
+            case LOST : // Fall through to NOT_STARTED state
+            case NOT_STARTED :
+                button_task();
+                break;
+            case PLAYING :
+                // TODO Pacer loop or task scheduler
+                //TODO Ball task handled here
+                //ball_task();
+                paddle_task();
+                break;
         }
-
         tinygl_update();
     }
+
 }

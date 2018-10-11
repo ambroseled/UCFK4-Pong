@@ -1,5 +1,8 @@
 
 
+
+
+
 #ifndef COMMS_H
 #define COMMS_H
 
@@ -22,11 +25,35 @@ typedef stuct data_s {
     uint8_t ball;
 } Data;
 
-void send_start();
+
+/**
+* Used to intialise the ir_uart module
+*/
+void comms_init(void);
 
 
-void send_game_over();
+/**
+* Sends a start signal to the other board
+*/
+void send_start(void);
 
+
+/**
+* Sends a winning signal to the other board
+*/
+void send_won(void);
+
+
+/**
+* Sends a passed ball to the other board
+*/
+void send_ball(Ball);
+
+
+/**
+* Reciving data from the other board
+*/
+Data receiveData(void);
 
 
 #endif

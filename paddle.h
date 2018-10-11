@@ -8,15 +8,20 @@
 #define PADDLE_H
 
 
-#define MAX_LEFT 6
-#define MAX_RIGHT 0
-
-
 #include "system.h"
 #include "tinygl.h"
 #include "navswitch.h"
 
 
+// Defining constants used for the edges of the board
+#define MAX_LEFT 6
+#define MAX_RIGHT 0
+
+
+/**
+* This struct holds two tinygl_point_t's which hold the end points of the
+* paddle
+*/
 typedef struct paddle {
     tinygl_point_t left;
     tinygl_point_t right;
@@ -41,7 +46,6 @@ void paddle_show(void);
 * NAVSWITCH_SOUTH navswitch_push_event_p.
 */
 void paddle_move(void);
-
 
 
 #endif

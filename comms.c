@@ -1,3 +1,8 @@
+
+
+
+
+
 #include "ir_uart.h"
 #include "comms.h"
 
@@ -61,9 +66,9 @@ uint8_t send_ball(Ball ball) {
     }
 }
 
-
+//TODO Alter once know how the ball is
 /**
-*
+* Reciving data from the other board
 */
 Data receiveData(void) {
     // Initializing variables used to receive data
