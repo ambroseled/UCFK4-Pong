@@ -9,7 +9,7 @@
 #include "pacer.h"
 #include "paddle.h"
 #include "messages.h"
-#include "fonts/font3x5_1.h"
+#include "fonts/font3x5_1.h"  // <-- ../fonts/font3x5_1.h
 #include "font.h"
 #include "button.h"
 #include "task.h"
