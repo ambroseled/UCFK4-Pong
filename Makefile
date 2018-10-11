@@ -16,49 +16,49 @@ all: game.out
 
 
 # Compile: create object files from C source files.
-game.o: game.c drivers/avr/system.h utils/tinygl.h paddle.h utils/pacer.h utils/font.h messages.h drivers/button.h utils/task.h
+game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h paddle.h ../../utils/pacer.h ../../utils/font.h messages.h ../../drivers/button.h ../../utils/task.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-paddle.o: paddle.c drivers/avr/system.h utils/tinygl.h drivers/navswitch.h utils/tinygl.h
+paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers/navswitch.h ../../utils/tinygl.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-messages.o: messages.c utils/tinygl.h messages.h
+messages.o: messages.c ../../utils/tinygl.h messages.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-pio.o: drivers/avr/pio.c drivers/avr/pio.h drivers/avr/system.h
+pio.o: ../../drivers/avr/pio.c ../../drivers/avr/pio.h ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-system.o: drivers/avr/system.c drivers/avr/system.h
+system.o: ../../drivers/avr/system.c ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-display.o: drivers/display.c drivers/avr/system.h drivers/display.h drivers/ledmat.h
+display.o: ../../drivers/display.c ../../drivers/avr/system.h ../../drivers/display.h ../../drivers/ledmat.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-ledmat.o: drivers/ledmat.c drivers/avr/pio.h drivers/avr/system.h drivers/ledmat.h
+ledmat.o: ../../drivers/ledmat.c ../../drivers/avr/pio.h ../../drivers/avr/system.h ../../drivers/ledmat.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-font.o: utils/font.c drivers/avr/system.h utils/font.h
+font.o: ../../utils/font.c ../../drivers/avr/system.h ../../utils/font.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-navswitch.o: drivers/navswitch.c drivers/avr/delay.h drivers/avr/pio.h drivers/avr/system.h drivers/navswitch.h
+navswitch.o: ../../drivers/navswitch.c ../../drivers/avr/delay.h ../../drivers/avr/pio.h ../../drivers/avr/system.h ../../drivers/navswitch.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-tinygl.o: utils/tinygl.c drivers/avr/system.h drivers/display.h utils/font.h utils/tinygl.h
+tinygl.o: ../../utils/tinygl.c ../../drivers/avr/system.h ../../drivers/display.h ../../utils/font.h ../../utils/tinygl.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-pacer.o: utils/pacer.c drivers/avr/system.h drivers/avr/timer.h utils/pacer.h
+pacer.o: ../../utils/pacer.c ../../drivers/avr/system.h ../../drivers/avr/timer.h ../../utils/pacer.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-timer.o: drivers/avr/timer.c drivers/avr/system.h drivers/avr/timer.h
+timer.o: ../../drivers/avr/timer.c ../../drivers/avr/system.h ../../drivers/avr/timer.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-button.o: drivers/button.c drivers/button.h
+button.o: ../../drivers/button.c ../../drivers/button.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-timer.o: drivers/avr/timer.c drivers/avr/system.h drivers/avr/timer.h
+timer.o: ../../drivers/avr/timer.c ../../drivers/avr/system.h ../../drivers/avr/timer.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-task.o: utils/task.c drivers/avr/system.h drivers/avr/timer.h utils/task.h
+task.o: ../../utils/task.c ../../drivers/avr/system.h ../../drivers/avr/timer.h ../../utils/task.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 
