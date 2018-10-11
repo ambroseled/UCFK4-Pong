@@ -5,7 +5,7 @@
 
 # Definitions.
 CC = avr-gcc
-CFLAGS = -mmcu=atmega32u2 -Os -Wall -Wstrict-prototypes -Wextra -g -I. -I../../drivers/avr -I../../utils -I../../drivers -I../../fonts
+CFLAGS = -mmcu=atmega32u2 -Os -Wall -Wstrict-prototypes -g -I. -I../../drivers/avr -I../../utils -I../../drivers
 OBJCOPY = avr-objcopy
 SIZE = avr-size
 DEL = rm
@@ -16,7 +16,7 @@ all: game.out
 
 
 # Compile: create object files from C source files.
-game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../utils/pacer.h ../../utils/font.h ../../drivers/button.h ../../utils/task.h ../../fonts/font3x5_1_r.h
+game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../utils/pacer.h ../../utils/font.h ../../drivers/button.h ../../utils/task.h 
 	$(CC) -c $(CFLAGS) $< -o $@
 
 paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers/navswitch.h ../../utils/tinygl.h
