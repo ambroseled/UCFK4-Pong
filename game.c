@@ -13,7 +13,6 @@
 #include "fonts/font3x5_1.h"
 #include "font.h"
 #include "button.h"
-#include "task.h"
 
 
 // Defining rate constants used in the game
