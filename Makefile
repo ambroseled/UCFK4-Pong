@@ -1,7 +1,8 @@
-# File:   Makefile
-# Author: M. P. Hayes, UCECE
-# Date:   12 Sep 2010
-# Descr:  Makefile for lab2-ex5
+# MakeFile for game
+# @team 128
+# @author Ambrose Ledbrook - 79172462
+# @aithor 
+
 
 # Definitions.
 CC = avr-gcc

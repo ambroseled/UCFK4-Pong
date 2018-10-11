@@ -1,7 +1,8 @@
 /**
-*
-*
-*
+* The game
+* @team 128
+* @author Ambrose Ledbrook - 79172462
+* @author
 *
 */
 #include "system.h"
@@ -138,6 +139,10 @@ int main(void) {
     show_welcome();
 
 
+    //TODO Need to handle ball hitting paddle
+    //TODO Need to get a better pacer loop or task handler going
+    //TODO Need to test and better configure the ir communications
+
     while(1) {
         pacer_wait();
         //TODO Check for incoming messages
@@ -149,7 +154,7 @@ int main(void) {
                 break;
             case PLAYING :
                 // TODO Pacer loop or task scheduler
-                //TODO Ball task handled here
+                //TODO Update ball
                 //ball_task();
                 paddle_task();
                 break;

@@ -1,8 +1,9 @@
 /**
+* Paddle module
+* @team 128
+* @author Ambrose Ledbrook - 79172462
 *
-*
-*
-*
+* This module provides the functionality of the players paddle
 */
 #include "paddle.h"
 #include "system.h"

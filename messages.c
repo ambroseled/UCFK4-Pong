@@ -1,8 +1,8 @@
 /**
-*
-*
-*
-*
+* Message module
+* @team 128
+* @author Ambrose Ledbrook - 79172462
+* This module provides simple methods used to display messages to the player
 */
 #include "messages.h"
 #include "tinygl.h"
