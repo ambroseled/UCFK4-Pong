@@ -49,9 +49,6 @@ tinygl.o: ../../utils/tinygl.c ../../drivers/avr/system.h ../../drivers/display.
 pacer.o: ../../utils/pacer.c ../../drivers/avr/system.h ../../drivers/avr/timer.h ../../utils/pacer.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-timer.o: ../../drivers/avr/timer.c ../../drivers/avr/system.h ../../drivers/avr/timer.h
-	$(CC) -c $(CFLAGS) $< -o $@
-
 button.o: ../../drivers/button.c ../../drivers/button.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
