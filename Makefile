@@ -1,10 +1,12 @@
-# File:   Makefile
-# Author: M. P. Hayes, UCECE - Modified for Pong Game
-# Descr:  Makefile for PongGame
+# MakeFile for game
+# @team 128
+# @author Ambrose Ledbrook - 79172462
+# @aithor
+
 
 # Definitions.
 CC = avr-gcc
-CFLAGS = -mmcu=atmega32u2 -Os -Wall -Wstrict-prototypes -g -I. -I../../drivers/avr -I../../utils -I../../drivers
+CFLAGS = -mmcu=atmega32u2 -Os -Wall -Wstrict-prototypes -Wextra -g -I. -I../../drivers/avr -I../../utils -I../../drivers -I../../fonts
 OBJCOPY = avr-objcopy
 SIZE = avr-size
 DEL = rm
@@ -15,13 +17,10 @@ all: game.out
 
 
 # Compile: create object files from C source files.
-game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../utils/pacer.h ../../utils/font.h ../../drivers/button.h ../../utils/task.h
+game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h paddle.h ../../utils/pacer.h ../../utils/font.h messages.h ../../drivers/button.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers/navswitch.h ../../utils/tinygl.h
-	$(CC) -c $(CFLAGS) $< -o $@
-
-ball3.o: ball3.c ../../drivers/avr/system.h ../../drivers/display.h ../../utils/font.h ../../utils/pacer.h ../../utils/tinygl.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 messages.o: messages.c ../../utils/tinygl.h messages.h
@@ -57,17 +56,11 @@ timer.o: ../../drivers/avr/timer.c ../../drivers/avr/system.h ../../drivers/avr/
 button.o: ../../drivers/button.c ../../drivers/button.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-task.o: ../../utils/task.c ../../drivers/avr/system.h ../../drivers/avr/timer.h ../../utils/task.h
-	$(CC) -c $(CFLAGS) $< -o $@
-
-
-
 
 
 
 # Link: create ELF output file from object files.
-
-game.out: game.o paddle.o system.o ball3.o display.o ledmat.o font.o tinygl.o pio.o navswitch.o pacer.o timer.o messages.o button.o task.o timer.o
+game.out: game.o paddle.o system.o display.o ledmat.o font.o tinygl.o pio.o navswitch.o pacer.o timer.o messages.o button.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 
