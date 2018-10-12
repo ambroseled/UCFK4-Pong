@@ -71,6 +71,7 @@ void game_init(void) {
     pacer_init(PACER_RATE);
     button_init();
     tiny_init();
+    comms_init();
     game_state = NOT_STARTED;
 }
 
@@ -114,6 +115,7 @@ void change_states(Game_states new_state) {
             break;
         case LOST :
             show_lost();
+            send_won();
             break;
         case PLAYING :
             //TODO Send start signal to other board
@@ -132,25 +134,28 @@ void button_task(void) {
     if (button_push_event_p(0)) {
         // Clearing the display
         clear_display();
-        // Updating the game state to PLAYING
-        uint8_t sent = send_start();
-        if (sent) {
-            change_states(PLAYING);
-        }
+        // Updating the game state to WAITING
+        change_states(WAITING);
+        // Sendng a signal to the other board to start the game
+        send_start();
     }
 }
 
 
-void check_start() {
+/**
+* Receives data trough the ir receiver. If the data recieved matches the
+* defined start code then the game state is changed to PLAYING
+*/
+void check_start(void) {
     Data received = receiveData();
-    if (received.type = START_CODE) {
+    if (received.type == START_CODE) {
         clear_display();
         change_states(PLAYING);
     }
 }
 
 
-void check_ir() {
+void check_ir(void) {
     Data received = receiveData();
 
     switch(received.type) {
@@ -174,6 +179,7 @@ int main(void) {
     game_init();
     show_welcome();
     uint8_t game_tick = 0;
+    uint8_t test_tick = 0;
 
 
     //TODO Need to handle ball hitting paddle
@@ -183,6 +189,7 @@ int main(void) {
     while(1) {
         pacer_wait();
         game_tick++;
+        test_tick++;
         //TODO Check for incoming messages
         switch(game_state) {
             case WON : // Fall through to NOT_STARTED state
@@ -199,6 +206,7 @@ int main(void) {
             case WAITING :
                 // Wait for ball or win
                 check_ir();
+                paddle_task();
                 break;
             break;
         }

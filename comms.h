@@ -12,7 +12,7 @@
 #define COMMS_H
 
 #define WIN_CODE 12  // Just a random value
-#define START_CODE 18 // Another random value
+#define START_CODE 33 // Another random value
 #define BALL_CODE 5
 
 
