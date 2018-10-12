@@ -1,11 +1,11 @@
 # File:   Makefile
 # Author: M. P. Hayes, UCECE - Modified for Pong Game
-# Date:   12 Sep 2010 
+# Date:   12 Sep 2010
 # Descr:  Makefile for PongGame
 
 # Definitions.
 CC = avr-gcc
-CFLAGS = -mmcu=atmega32u2 -Os -Wall -Wstrict-prototypes -g -I. -I../../drivers/avr -I../../utils -I../../drivers
+CFLAGS = -mmcu=atmega32u2 -Os -Wall -Wstrict-prototypes -g -I. -I../../drivers/avr -I../../utils -I../../drivers -I../../fonts
 OBJCOPY = avr-objcopy
 SIZE = avr-size
 DEL = rm
@@ -16,18 +16,14 @@ all: game.out
 
 
 # Compile: create object files from C source files.
-game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../utils/pacer.h ../../utils/font.h ../../drivers/button.h ../../utils/task.h 
+game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../utils/pacer.h ../../utils/font.h ../../drivers/button.h ../../utils/task.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers/navswitch.h ../../utils/tinygl.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-<<<<<<< HEAD
-ball3.o: ball3.c ../../drivers/avr/system.h ../../drivers/display.h ../../utils/font.h ../../utils/pacer.h ../../utils/tinygl.h
-=======
-paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers/navswitch.h ../../utils/tinygl.h
->>>>>>> 728e08d49f2d3403d3aecc29eb0f8a36e623a3ad
-	$(CC) -c $(CFLAGS) $< -o $@
+#ball3.o: ball3.c ../../drivers/avr/system.h ../../drivers/display.h ../../utils/font.h ../../utils/pacer.h ../../utils/tinygl.h
+	#$(CC) -c $(CFLAGS) $< -o $@
 
 messages.o: messages.c ../../utils/tinygl.h messages.h
 	$(CC) -c $(CFLAGS) $< -o $@
@@ -68,8 +64,6 @@ task.o: ../../utils/task.c ../../drivers/avr/system.h ../../drivers/avr/timer.h 
 
 
 
-
-
 # Link: create ELF output file from object files.
 game.out: game.o paddle.o system.o ball3.o display.o ledmat.o font.o tinygl.o pio.o navswitch.o pacer.o timer.o messages.o button.o task.o timer.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
@@ -87,4 +81,3 @@ clean:
 program: game.out
 	$(OBJCOPY) -O ihex game.out game.hex
 	dfu-programmer atmega32u2 erase; dfu-programmer atmega32u2 flash game.hex; dfu-programmer atmega32u2 start
-
