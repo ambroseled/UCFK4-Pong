@@ -2,7 +2,7 @@
 * Comms module source
 * @team 128
 * @author Ambrose Ledbrook - 79172462
-* @author
+* @author Josh Jarvis -
 * This module provides the ir communication functionality used by the game
 * to communicate between the two boards
 */
@@ -56,7 +56,7 @@ uint8_t send_won(void) {
 
 /**
 * Sends the ball to the other board
-*/
+
 uint8_t send_ball(Ball ball) {
     // Checking if ready to send
     if (ir_uart_write_ready_p()) {
@@ -69,7 +69,7 @@ uint8_t send_ball(Ball ball) {
         // Send failed so returning 0
         return 0;
     }
-}
+} */
 
 //TODO Alter once know how the ball is
 /**
@@ -77,7 +77,6 @@ uint8_t send_ball(Ball ball) {
 */
 Data receiveData(void) {
     // Initializing variables used to receive data
-    uint8_t message;
     Data dataReceived = {EMPTY, 0};
 
     // Checking if ready to receive
@@ -85,14 +84,10 @@ Data receiveData(void) {
         // Receiving data into the dataReceived variable
         dataReceived.data_type = ir_uart_getc();
 
-        // A win code has been recived
-        if (message = WIN_CODE) {
-            dataReceived.ball = ir_uart_getc();
         // Ball has been received
-        } else if (message = BALL_CODE) {
-            dataReceived.data_type = message;
+        if (dataReceived.data_type = BALL_CODE) {
+            //TODO get ball pos
         }
-        // Else either a START_CODE or in valid message has been received
     }
     // Returning the data that was received
     return dataReceived;

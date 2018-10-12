@@ -2,7 +2,7 @@
 * Comms module header
 * @team 128
 * @author Ambrose Ledbrook - 79172462
-* @author
+* @author Josh Jarvis -
 * This module provides the ir communication functionality used by the game
 * to communicate between the two boards
 */
@@ -23,14 +23,15 @@ typedef enum {
     GAME_WON,
     BALL_POS,
     EMPTY,
-    NOT_ACCEPTED
+    NOT_ACCEPTED,
+    START
 } Data_Type;
 
 
 /**
 * The data strucutre that is used to receive data from the other board
 */
-typedef stuct data_s {
+typedef struct data_s {
     Data_Type data_type;
     uint8_t ball;
 } Data;
@@ -60,9 +61,9 @@ uint8_t send_won(void);
 
 /**
 * Sends a passed ball to the other board. Returning 1 on success and 0 on fail
-*/
-uint8_t send_ball(Ball);
 
+uint8_t send_ball(Ball);
+*/
 
 /**
 * Reciving data from the other board

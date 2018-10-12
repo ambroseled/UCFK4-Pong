@@ -2,7 +2,7 @@
 * The game
 * @team 128
 * @author Ambrose Ledbrook - 79172462
-* @author
+* @author Josh Jarvis -
 *
 */
 #include "system.h"
@@ -13,14 +13,15 @@
 #include "font3x5_1.h"
 #include "font.h"
 #include "button.h"
+//#include "comms.h"
 
 
 // Defining rate constants used in the game
-#define PACER_RATE 500
+#define PACER_RATE 300
 
 #define MESSAGE_RATE 15
 
-#define BUTTON_TASK_RATE 100
+#define BUTTON_RATE 20
 
 
 
@@ -77,8 +78,6 @@ void game_init(void) {
 * Handles the movement of the paddle
 */
 void paddle_task(void) {
-    // Updating navswitch
-    navswitch_update();
     // Moving paddle
     paddle_move();
 }
@@ -90,6 +89,7 @@ void ball_task(void) {
 
 
 /*
+.PHONY: clean
 * Clears the display of the ledmat
 */
 void clear_display(void) {
@@ -113,6 +113,10 @@ void change_states(Game_states new_state) {
         case LOST :
             show_lost();
             break;
+        case PLAYING :
+            //TODO Send start signal to other board
+            //TODO initialise ball
+            break;
         default :
             break;
     }
@@ -122,15 +126,37 @@ void change_states(Game_states new_state) {
 /**
 * Checks if the button is pressed if so the game state is changed to PLAYING
 */
-static void button_task(void) {
-    button_update();
+void button_task(void) {
     if (button_push_event_p(0)) {
         // Clearing the display
         clear_display();
         // Updating the game state to PLAYING
         change_states(PLAYING);
+        //send_start();
     }
 }
+
+/**
+void check_ir(void) {
+    Data received = receiveData();
+    switch (received.data_type) {
+        case GAME_WON :
+            break;
+        case BALL_POS :
+            break;
+        case EMPTY :
+            break;
+        case NOT_ACCEPTED :
+            break;
+        case START :
+            if (game_state != PLAYING) {
+                clear_display();
+                change_states(PLAYING);
+            }
+            break;
+        break;
+    }
+}*/
 
 
 /*
@@ -139,27 +165,36 @@ static void button_task(void) {
 int main(void) {
     game_init();
     show_welcome();
+    uint8_t game_tick = 0;
 
 
     //TODO Need to handle ball hitting paddle
-    //TODO Need to get a better pacer loop or task handler going
     //TODO Need to test and better configure the ir communications
+
 
     while(1) {
         pacer_wait();
+        game_tick++;
         //TODO Check for incoming messages
         switch(game_state) {
             case WON : // Fall through to NOT_STARTED state
             case LOST : // Fall through to NOT_STARTED state
             case NOT_STARTED :
                 button_task();
+                //check_ir();
                 break;
             case PLAYING :
-                // TODO Pacer loop or task scheduler
-                //TODO Update ball
+                //TODO ball movement
                 //ball_task();
                 paddle_task();
                 break;
+            break;
+        }
+        // Updating button and navswitch at 20 hertz
+        if (game_tick = PACER_RATE / BUTTON_RATE) {
+            navswitch_update();
+            button_update();
+            game_tick = 0;
         }
         tinygl_update();
     }
