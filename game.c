@@ -13,7 +13,7 @@
 #include "font3x5_1.h"
 #include "font.h"
 #include "button.h"
-//#include "comms.h"
+#include "comms.h"
 
 
 // Defining rate constants used in the game
@@ -136,27 +136,20 @@ void button_task(void) {
     }
 }
 
-/**
+
 void check_ir(void) {
     Data received = receiveData();
     switch (received.data_type) {
-        case GAME_WON :
-            break;
-        case BALL_POS :
-            break;
-        case EMPTY :
-            break;
-        case NOT_ACCEPTED :
-            break;
         case START :
             if (game_state != PLAYING) {
                 clear_display();
                 change_states(PLAYING);
             }
             break;
-        break;
+        default :
+            break;
     }
-}*/
+}
 
 
 /*
