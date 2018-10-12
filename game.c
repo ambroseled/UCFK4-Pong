@@ -1,5 +1,5 @@
 /**
-* The game
+* Game module source
 * @team 128
 * @author Ambrose Ledbrook - 79172462
 * @author Josh Jarvis -
@@ -14,37 +14,7 @@
 #include "font.h"
 #include "button.h"
 #include "comms.h"
-
-
-// Defining rate constants used in the game
-#define PACER_RATE 300
-
-#define MESSAGE_RATE 15
-
-#define BUTTON_RATE 20
-
-
-
-/**
-* This enum holds all possible states that the game can be in
-*/
-typedef enum {
-    // Before game has started
-    NOT_STARTED,
-    // Game is being played
-    PLAYING,
-    WAITING,
-    // This player won the game
-    WON,
-    // This player lost the game
-    LOST
-} Game_states;
-
-
-// Variable holding the current state of the game
-Game_states game_state;
-uint8_t tick_count = 1;
-
+#include "game.h"
 
 /*
 * Intialises the tinygl module used by the game
@@ -155,6 +125,12 @@ void check_start(void) {
 }
 
 
+/**
+* This method receives data through the ir receiver. it then checks if the
+* received data is any of the expected values, a WIN_CODE or a BALL_CODE.
+* Corresponding to either a notification that this board has won the game or
+* passing the ball back to this board
+*/
 void check_ir(void) {
     Data received = receiveData();
 
@@ -164,7 +140,8 @@ void check_ir(void) {
             change_states(WON);
             break;
         case BALL_CODE :
-            //TODO change to playing state
+            change_states(PLAYING);
+            //TODO Show the ball
             break;
         default :
             break;
