@@ -15,6 +15,7 @@
 #include "button.h"
 #include "comms.h"
 #include "game.h"
+#include "led.h"
 
 /*
 * Intialises the tinygl module used by the game
@@ -42,6 +43,8 @@ void game_init(void) {
     button_init();
     tiny_init();
     comms_init();
+    led_init();
+    led_set(0, 0);
     game_state = NOT_STARTED;
 }
 
@@ -88,9 +91,12 @@ void change_states(Game_states new_state) {
             send_won();
             break;
         case PLAYING :
+            led_set(0, 1);
             //TODO Send start signal to other board
             //TODO initialise ball
             break;
+        case WAITING :
+            led_set(0, 0);
         default :
             break;
     }
