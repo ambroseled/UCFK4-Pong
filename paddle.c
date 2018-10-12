@@ -2,7 +2,7 @@
 * Paddle module source
 * @team 128
 * @author Ambrose Ledbrook - 79172462
-*
+* @author Josh Jarvis - 
 * This module provides the functionality of the players paddle
 */
 
