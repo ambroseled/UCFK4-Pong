@@ -83,11 +83,11 @@ Data receiveData(void) {
     if (ir_uart_read_ready_p) {
         // Receiving data into the dataReceived variable
         dataReceived.data_type = ir_uart_getc();
-
+        /**
         // Ball has been received
         if (dataReceived.data_type = BALL_CODE) {
             //TODO get ball pos
-        }
+        }*/
     }
     // Returning the data that was received
     return dataReceived;
