@@ -1,12 +1,11 @@
-# MakeFile for game
-# @team 128
-# @author Ambrose Ledbrook - 79172462
-# @aithor
-
+# File:   Makefile
+# Author: M. P. Hayes, UCECE - Modified for Pong Game
+# Date:   12 Sep 2010
+# Descr:  Makefile for PongGame
 
 # Definitions.
 CC = avr-gcc
-CFLAGS = -mmcu=atmega32u2 -Os -Wall -Wstrict-prototypes -Wextra -g -I. -I../../drivers/avr -I../../utils -I../../drivers -I../../fonts
+CFLAGS = -mmcu=atmega32u2 -Os -Wall -Wstrict-prototypes -g -I. -I../../drivers/avr -I../../utils -I../../drivers -I../../fonts
 OBJCOPY = avr-objcopy
 SIZE = avr-size
 DEL = rm
@@ -22,6 +21,9 @@ game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h paddle.h ../../ut
 
 paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers/navswitch.h ../../utils/tinygl.h
 	$(CC) -c $(CFLAGS) $< -o $@
+
+#ball3.o: ball3.c ../../drivers/avr/system.h ../../drivers/display.h ../../utils/font.h ../../utils/pacer.h ../../utils/tinygl.h
+	#$(CC) -c $(CFLAGS) $< -o $@
 
 messages.o: messages.c ../../utils/tinygl.h messages.h
 	$(CC) -c $(CFLAGS) $< -o $@
