@@ -15,5 +15,5 @@ A simple implementation of pong using two ucfk4 boards. Developed by:
 
 ## The Game
 - The goal of the game is to win by causing the other player to miss the ball
-- Use your paddle to bounce the ball back onot the other players screen and
+- Use your paddle to bounce the ball back onto the other players screen and
   stop it from hitting the back of your screen.
