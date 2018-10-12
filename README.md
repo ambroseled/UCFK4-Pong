@@ -7,5 +7,5 @@ A simple implementation of pong using two ucfk4 boards
   senders facing each other
 - Run `make clean program` on both boards
 - Press the button on one of the boards to start the game
-* The currently avtive player will be indicated by the blue led
+    * The currently avtive player will be indicated by the blue led
 - Use the navswitch to control the game
