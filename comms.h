@@ -16,24 +16,14 @@
 #define BALL_CODE 5
 
 
-/**
-* Holds all possible types of messages that can be sent or received
-*/
-typedef enum {
-    GAME_WON,
-    BALL_POS,
-    EMPTY,
-    NOT_ACCEPTED,
-    START
-} Data_Type;
-
 
 /**
 * The data strucutre that is used to receive data from the other board
 */
 typedef struct data_s {
-    Data_Type data_type;
-    uint8_t ball;
+    uint8_t type;
+    uint8_t ball_pos;
+    uint8_t ball_dir;
 } Data;
 
 
@@ -49,14 +39,14 @@ void comms_init(void);
 /**
 * Sends a start signal to the other board. Returning 1 on success and 0 on fail
 */
-uint8_t send_start(void);
+void send_start(void);
 
 
 /**
 * Sends a winning signal to the other board. Returning 1 on success
 * and 0 on fail
 */
-uint8_t send_won(void);
+void send_won(void);
 
 
 /**

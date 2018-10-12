@@ -33,6 +33,7 @@ typedef enum {
     NOT_STARTED,
     // Game is being played
     PLAYING,
+    WAITING,
     // This player won the game
     WON,
     // This player lost the game
@@ -131,24 +132,25 @@ void button_task(void) {
         // Clearing the display
         clear_display();
         // Updating the game state to PLAYING
-        change_states(PLAYING);
-        //send_start();
+        uint8_t sent = send_start();
+        if (sent) {
+            change_states(PLAYING);
+        }
     }
 }
 
 
-void check_ir(void) {
+void check_start() {
     Data received = receiveData();
-    switch (received.data_type) {
-        case START :
-            if (game_state != PLAYING) {
-                clear_display();
-                change_states(PLAYING);
-            }
-            break;
-        default :
-            break;
+    if (received.type = START_CODE) {
+        clear_display();
+        change_states(PLAYING);
     }
+}
+
+
+void check_ir() {
+
 }
 
 
@@ -174,12 +176,16 @@ int main(void) {
             case LOST : // Fall through to NOT_STARTED state
             case NOT_STARTED :
                 button_task();
-                //check_ir();
+                check_start();
                 break;
             case PLAYING :
                 //TODO ball movement
                 //ball_task();
                 paddle_task();
+                break;
+            case WAITING :
+                // Wait for ball or win
+                //check_ir();
                 break;
             break;
         }
