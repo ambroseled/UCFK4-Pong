@@ -85,12 +85,13 @@ void paddle_task(void) {
 
 
 void ball_task(void) {
-    //TODO Implement
+    //TODO Move the ball here
+    //TODO Check ball collisons in other function from here
+    //TODO Send ball if reaches end from here
 }
 
 
 /*
-.PHONY: clean
 * Clears the display of the ledmat
 */
 void clear_display(void) {
@@ -150,7 +151,19 @@ void check_start() {
 
 
 void check_ir() {
+    Data received = receiveData();
 
+    switch(received.type) {
+        case WIN_CODE :
+            clear_display();
+            change_states(WON);
+            break;
+        case BALL_CODE :
+            //TODO change to playing state
+            break;
+        default :
+            break;
+    }
 }
 
 
@@ -185,7 +198,7 @@ int main(void) {
                 break;
             case WAITING :
                 // Wait for ball or win
-                //check_ir();
+                check_ir();
                 break;
             break;
         }
