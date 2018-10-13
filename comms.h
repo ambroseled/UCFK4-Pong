@@ -14,6 +14,15 @@
 #define WIN_CODE 12  // Just a random value
 #define START_CODE 33 // Another random value
 #define BALL_CODE 5
+//Defining codes for all ball directions
+#define NORTH 25
+#define NORTH_EAST 26
+#define EAST 27
+#define SOUTH_EAST 28
+#define SOUTH 29
+#define SOUTH_WEST 30
+#define WEST 31
+#define NORTH_WEST 32
 
 #include "boing.h"
 

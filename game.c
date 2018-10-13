@@ -111,10 +111,12 @@ void button_task(void) {
 }
 
 
+/**
+* Checks if the ball has reached the top of the ledmat if so the ball is sent
+* to the other board. Otherwise the ball postion is updated.
+*/
 void ball_task(void) {
-    //TODO Move the ball here
-    //TODO Check ball collisons in other function from here
-    //TODO Send ball if reaches end from here
+    //TODO Check ball collisons with function in ball module
     if (check_send()) {
         send_ball_pos();
         change_states(WAITING);
@@ -152,7 +154,7 @@ void check_ir(void) {
             change_states(WON);
             break;
         case BALL_CODE :
-            receiveBall(received.ball_pos);
+            receiveBall(received.ball_pos, received.ball_dir);
             change_states(PLAYING);
             break;
         default :

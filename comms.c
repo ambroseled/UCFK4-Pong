@@ -37,6 +37,40 @@ void send_won(void) {
 }
 
 
+uint8_t get_dir(boing_dir_t ball_dir) {
+    uint8_t to_send = 0;
+    switch (ball_dir) {
+        case DIR_N :
+            to_send = NORTH;
+            break;
+        case DIR_NE :
+            to_send = NORTH_EAST;
+            break;
+        case DIR_E :
+            to_send = EAST;
+            break;
+        case DIR_SE :
+            to_send = SOUTH_EAST;
+            break;
+        case DIR_S :
+            to_send = SOUTH;
+            break;
+        case DIR_SW :
+            to_send = SOUTH_WEST;
+            break;
+        case DIR_W :
+            to_send = WEST;
+            break;
+        case DIR_NW :
+            to_send = NORTH_WEST;
+            break;
+        default :
+            break;
+    }
+    return to_send;
+}
+
+
 /**
 * Sends the ball to the other board
 */
@@ -44,6 +78,7 @@ void send_ball(boing_state_t ball) {
     // Sending a BALL_CODE
     ir_uart_putc(BALL_CODE);
     ir_uart_putc(ball.pos.y);
+    ir_uart_putc(get_dir(ball.dir));
 }
 
 
@@ -60,6 +95,7 @@ Data receiveData(void) {
 
         if (dataReceived.type == BALL_CODE) {
             dataReceived.ball_pos = ir_uart_getc();
+            dataReceived.ball_dir = ir_uart_getc();
         }
     }
     // Returning the data that was received

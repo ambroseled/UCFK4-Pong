@@ -16,7 +16,7 @@ boing_state_t ball_update(void);
 void send_ball_pos(void);
 
 
-void receiveBall(uint8_t pos);
+void receiveBall(uint8_t pos, uint8_t dir);
 
 
 uint8_t check_send(void);

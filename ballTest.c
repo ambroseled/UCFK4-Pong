@@ -11,7 +11,7 @@ static boing_state_t ball;
 
 
 void ball_init(void) {
-    ball = boing_init(4, 3, DIR_E);
+    ball = boing_init(4, 3, DIR_NE);
 }
 
 
@@ -28,10 +28,35 @@ void send_ball_pos(void) {
 }
 
 
-void receiveBall(uint8_t pos) {
+void receiveBall(uint8_t pos, uint8_t dir) {
     ball.pos.x = 0;
     ball.pos.y = pos;
-    ball.dir = DIR_W;
+    switch (dir) {
+        case NORTH :
+            ball.dir = DIR_N;
+            break;
+        case NORTH_EAST :
+            ball.dir = DIR_NE;
+            break;
+        case EAST :
+            ball.dir = DIR_E;
+            break;
+        case SOUTH_EAST :
+            ball.dir = DIR_SE;
+            break;
+        case SOUTH :
+            ball.dir = DIR_S;
+            break;
+        case SOUTH_WEST :
+            ball.dir = DIR_SW;
+            break;
+        case WEST :
+            ball.dir = DIR_W;
+            break;
+        case NORTH_WEST :
+            ball.dir = DIR_NW;
+            break;
+    }
     ball_update();
 }
 
