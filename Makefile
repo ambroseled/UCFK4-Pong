@@ -19,7 +19,7 @@ all: game.out
 game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h paddle.h ../../utils/pacer.h ../../utils/font.h messages.h ../../drivers/button.h comms.h game.h ../../drivers/led.h ballTest.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers/navswitch.h ../../utils/tinygl.h
+paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers/navswitch.h ../../utils/tinygl.h paddle.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 #ball3.o: ball3.c ../../drivers/avr/system.h ../../drivers/display.h ../../utils/font.h ../../utils/pacer.h ../../utils/tinygl.h
