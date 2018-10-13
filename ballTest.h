@@ -15,9 +15,7 @@
 #define BALLTEST_H
 
 
-#include "boing.h"
-#include "tinygl.h"
-#include "comms.h"
+#include "ballTest.h"
 
 
 void ball_init(void);
@@ -33,6 +31,12 @@ void receiveBall(uint8_t pos, uint8_t dir);
 
 
 uint8_t check_send(void);
+
+
+uint8_t check_lost(void);
+
+
+uint8_t check_paddle(void);
 
 
 #endif

@@ -15,6 +15,7 @@
 #include "boing.h"
 #include "tinygl.h"
 #include "comms.h"
+#include "paddle.h"
 
 
 // boing_state_t variable which holds the postion and direction of the ball
@@ -25,7 +26,7 @@ static boing_state_t ball;
 * Intialising the state and postion of the ball
 */
 void ball_init(void) {
-    ball = boing_init(4, 3, DIR_NE);
+    ball = boing_init(0, 3, DIR_SW);
 }
 
 
@@ -39,6 +40,30 @@ void ball_update(void) {
     ball = boing_update(ball);
     // showing ball in its new postion
     tinygl_draw_point(ball.pos, 1);
+}
+
+
+void ball_reverse(void) {
+    // Removing current ball from ledmat
+    tinygl_draw_point(ball.pos, 0);
+    // Updating ball postion
+    ball = boing_reverse(ball);
+    // showing ball in its new postion
+    tinygl_draw_point(ball.pos, 1);
+}
+
+
+uint8_t check_paddle(void) {
+    if (ball.pos.x == 4) {
+        if (check_ball(ball.pos)) {
+            ball_reverse();
+            return 1;
+        } else {
+            return 0;
+        }
+    } else {
+        return 1;
+    }
 }
 
 

@@ -56,4 +56,7 @@ void paddle_show(void);
 void paddle_move(void);
 
 
+uint8_t check_ball(tinygl_point_t pos);
+
+
 #endif

@@ -64,3 +64,12 @@ void paddle_move(void) {
     // Showing the paddle in its new current postion
     paddle_show();
 }
+
+
+uint8_t check_ball(tinygl_point_t pos) {
+    if (pos.y >= paddle.right.y && pos.y <= paddle.left.y) {
+        return 1;
+    } else {
+        return 0;
+    }
+}

@@ -139,7 +139,12 @@ void ball_task(void) {
         change_states(WAITING);
     } else {
         // updating the postion of the ball
-        ball_update();
+        if (!check_paddle()) {
+            clear_display();
+            change_states(LOST);
+        } else {
+            ball_update();
+        }
     }
 }
 

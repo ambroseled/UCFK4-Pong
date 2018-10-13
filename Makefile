@@ -1,6 +1,6 @@
 # File:   Makefile
-# Author Ambrose Ledbrook - 79172462
-# Author Josh Jarvis -
+# Author: Ambrose Ledbrook - 79172462
+# Author: Josh Jarvis -
 # Date:  04-oct-2018
 # Descr:  Makefile for Pong Game
 
@@ -32,7 +32,7 @@ messages.o: messages.c ../../utils/tinygl.h messages.h
 comms.o: comms.c ../../drivers/avr/ir_uart.h ../../utils/boing.h comms.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-ballTest.o: ballTest.c ../../utils/boing.h ../../utils/tinygl.h ballTest.h
+ballTest.o: ballTest.c ../../utils/boing.h ../../utils/tinygl.h paddle.h ballTest.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 pio.o: ../../drivers/avr/pio.c ../../drivers/avr/pio.h ../../drivers/avr/system.h
