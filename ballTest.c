@@ -22,7 +22,7 @@ static boing_state_t ball;
 
 
 /**
-* intialising the state and postion of the ball
+* Intialising the state and postion of the ball
 */
 void ball_init(void) {
     ball = boing_init(4, 3, DIR_NE);
