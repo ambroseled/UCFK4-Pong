@@ -47,7 +47,6 @@ void game_init(void) {
     navswitch_init();
     paddle_init();
     pacer_init(PACER_RATE);
-    button_init();
     tiny_init();
     comms_init();
     led_init();
@@ -210,7 +209,6 @@ int main(void) {
         //TODO Check this and change BUTTON_RATE
         if (game_tick == (PACER_RATE / BUTTON_RATE)) {
             navswitch_update();
-            button_update();
             game_tick = 0;
         }
         // Updating tinygl
