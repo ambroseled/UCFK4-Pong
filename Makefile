@@ -1,7 +1,8 @@
 # File:   Makefile
-# Author: M. P. Hayes, UCECE - Modified for Pong Game
-# Date:   12 Sep 2010
-# Descr:  Makefile for PongGame
+# Author: Ambrose Ledbrook - 79172462
+# Author: Josh Jarvis -
+# Date:  04-oct-2018
+# Descr:  Makefile for Pong Game
 
 # Definitions.
 CC = avr-gcc
@@ -16,10 +17,10 @@ all: game.out
 
 
 # Compile: create object files from C source files.
-game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h paddle.h ../../utils/pacer.h ../../utils/font.h messages.h ../../drivers/button.h comms.h
+game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h paddle.h ../../utils/pacer.h ../../utils/font.h messages.h ../../drivers/button.h comms.h game.h ../../drivers/led.h ballTest.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers/navswitch.h ../../utils/tinygl.h
+paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers/navswitch.h ../../utils/tinygl.h paddle.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 #ball3.o: ball3.c ../../drivers/avr/system.h ../../drivers/display.h ../../utils/font.h ../../utils/pacer.h ../../utils/tinygl.h
@@ -28,7 +29,10 @@ paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers
 messages.o: messages.c ../../utils/tinygl.h messages.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-comms.o: comms.c ../../drivers/avr/ir_uart.h comms.h
+comms.o: comms.c ../../drivers/avr/ir_uart.h ../../utils/boing.h comms.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+ballTest.o: ballTest.c ../../utils/boing.h ../../utils/tinygl.h paddle.h ballTest.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 pio.o: ../../drivers/avr/pio.c ../../drivers/avr/pio.h ../../drivers/avr/system.h
@@ -73,15 +77,25 @@ usart1.o: ../../drivers/avr/usart1.c ../../drivers/avr/system.h ../../drivers/av
 prescale.o: ../../drivers/avr/prescale.c ../../drivers/avr/prescale.h ../../drivers/avr/system.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
+led.o: ../../drivers/led.c ../../drivers/avr/system.h ../../drivers/avr/pio.h ../../drivers/led.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+boing.o: ../../utils/boing.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../utils/boing.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
 
 
 
 # Link: create ELF output file from object files.
 <<<<<<< HEAD
+<<<<<<< HEAD
 game.out: game.o paddle.o system.o display.o ledmat.o font.o tinygl.o pio.o navswitch.o pacer.o timer.o messages.o button.o task.o timer.o
 =======
 game.out: game.o paddle.o system.o display.o ledmat.o font.o tinygl.o pio.o navswitch.o pacer.o timer.o messages.o button.o comms.o ir_uart.o timer0.o usart1.o prescale.o
 >>>>>>> 6dd508b1c9fb71c6874c939ab2fb2650351ab909
+=======
+game.out: game.o paddle.o system.o display.o ledmat.o font.o tinygl.o pio.o navswitch.o pacer.o timer.o messages.o button.o comms.o ir_uart.o timer0.o usart1.o prescale.o led.o ballTest.o boing.o
+>>>>>>> 54cea97a4a6150601e1708755fe982e286493ae9
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 

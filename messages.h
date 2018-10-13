@@ -1,17 +1,23 @@
 /**
-* Message module
+* Message module header file
 * @team 128
 * @author Ambrose Ledbrook - 79172462
-* @author Josh Jarvis - 
-* This module provides simple methods used to display messages to the player
+* @author Josh Jarvis -
+* @date 11-oct-2018
+*
+* @brief This module header provides simple methods used to display messages
+*        to the player to the game module.
 */
 
 
+// Defining inlcudes used by the module
 #ifndef PADDLE_H
 #define PADDLE_H
 
 
+// Inlcuding the tinygl module used by the module
 #include "tinygl.h"
+
 
 #endif
 

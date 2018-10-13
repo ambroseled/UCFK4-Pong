@@ -1,16 +1,21 @@
 /**
-* Paddle module header
+* Paddle module header file
 * @team 128
 * @author Ambrose Ledbrook - 79172462
-* @author Josh Jarvis - 
-* This module provides the functionality of the players paddle
+* @author Josh Jarvis -
+* @date 06-oct-2018
+*
+* @brief This module header provides the functionality of the players paddle to
+*        the game module.
 */
 
 
+// Defining constants, includes and typedefs used by the module
 #ifndef PADDLE_H
 #define PADDLE_H
 
 
+// Inlcuding modules used by the paddle
 #include "system.h"
 #include "tinygl.h"
 #include "navswitch.h"
@@ -19,9 +24,6 @@
 // Defining constants used for the edges of the board
 #define MAX_LEFT 6
 #define MAX_RIGHT 0
-
-
-#endif
 
 
 /**
@@ -52,3 +54,9 @@ void paddle_show(void);
 * NAVSWITCH_SOUTH navswitch_push_event_p.
 */
 void paddle_move(void);
+
+
+uint8_t check_ball(tinygl_point_t pos);
+
+
+#endif

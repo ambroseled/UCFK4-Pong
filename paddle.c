@@ -1,9 +1,11 @@
 /**
-* Paddle module source
+* Paddle module source code
 * @team 128
 * @author Ambrose Ledbrook - 79172462
-* @author Josh Jarvis - 
-* This module provides the functionality of the players paddle
+* @author Josh Jarvis -
+* @date 06-oct-2018
+*
+* @brief This module provides the functionality of the game paddle.
 */
 
 
@@ -12,8 +14,9 @@
 #include "tinygl.h"
 #include "navswitch.h"
 
+
 // Variable to hold the paddle
-static Paddle paddle;
+Paddle paddle;
 
 
 /**
@@ -60,4 +63,13 @@ void paddle_move(void) {
 
     // Showing the paddle in its new current postion
     paddle_show();
+}
+
+
+uint8_t check_ball(tinygl_point_t pos) {
+    if (pos.y >= paddle.right.y && pos.y <= paddle.left.y) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
