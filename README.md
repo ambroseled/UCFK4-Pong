@@ -1,8 +1,8 @@
 # ENCE260 UCFK4 Assignment - Pong
 
 A simple implementation of pong using two ucfk4 boards. Developed by:
-- Ambrose Ledbrook | 79172462
-- Josh Jarvis |
+- `Ambrose Ledbrook | 79172462`
+- `Josh Jarvis | `
 
 ## Instructions of use
 - Set up boards in a dimely lit area close together with ir receivers and
