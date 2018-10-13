@@ -18,7 +18,7 @@
 //TODO Check over
 #define BUTTON_RATE 300
 
-#define BALL_RATE 35
+#define BALL_RATE 50
 
 
 

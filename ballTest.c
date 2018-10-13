@@ -61,6 +61,10 @@ void receiveBall(uint8_t pos, uint8_t dir) {
 }
 
 
+//TODO reverse direction of ball if it hits the paddle
+//TODO check if ball hits back of ledmat
+
+
 uint8_t check_send(void) {
     if (ball.pos.x == 0) {
         return 1;
