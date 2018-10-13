@@ -1,13 +1,16 @@
 /**
-* Comms module source
+* Comms module source code
 * @team 128
 * @author Ambrose Ledbrook - 79172462
 * @author Josh Jarvis -
-* This module provides the ir communication functionality used by the game
-* to communicate between the two boards
+* @date 09-oct-2018
+*
+* @brief This module provides the ir communication functionality used by the
+*        game to communicate between the two boards.
 */
 
 
+// Including modules used for the communication
 #include "ir_uart.h"
 #include "comms.h"
 #include "boing.h"
@@ -37,8 +40,13 @@ void send_won(void) {
 }
 
 
+/**
+* Takes a boing_dir_t of the ball and converts it to a direction code to be
+* sent to the other board.
+*/
 uint8_t get_dir(boing_dir_t ball_dir) {
     uint8_t to_send = 0;
+    // Finding what direction was passed
     switch (ball_dir) {
         case DIR_N :
             to_send = NORTH;
@@ -67,33 +75,40 @@ uint8_t get_dir(boing_dir_t ball_dir) {
         default :
             break;
     }
+    // Returning the direction code to be sent
     return to_send;
 }
 
 
 /**
-* Sends the ball to the other board
+* Sends the ball to the other board, first a BALL_CODE is sent which is then
+* followed by the y-coordinate and then direction of the ball.
 */
 void send_ball(boing_state_t ball) {
     // Sending a BALL_CODE
     ir_uart_putc(BALL_CODE);
+    // Sending the ball y-coordinate
     ir_uart_putc(ball.pos.y);
+    // Sending the balls direction
     ir_uart_putc(get_dir(ball.dir));
 }
 
 
 /**
-* Reciving data from the other board
+* Reciving data from the other board, returns the data received in the form of
+* a Data struct variable, which holds the type of data that was received as well
+* as a ball y-coordinate and drection if a ball was received.
 */
 Data receiveData(void) {
-    // Initializing variables used to receive data
+    // Initializing variable used to receive data
     Data dataReceived = {0, 0, 0};
+    // Checking if ready to recieve data
     if (ir_uart_read_ready_p()) {
         // Receiving data into the dataReceived variable
         dataReceived.type = ir_uart_getc();
-        // Ball has been received
-
+        // Checking if a ball has been recived
         if (dataReceived.type == BALL_CODE) {
+            // Getting the y-coordinate and direction of the ball
             dataReceived.ball_pos = ir_uart_getc();
             dataReceived.ball_dir = ir_uart_getc();
         }

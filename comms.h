@@ -1,20 +1,26 @@
 /**
-* Comms module header
+* Comms module header file
 * @team 128
 * @author Ambrose Ledbrook - 79172462
 * @author Josh Jarvis -
-* This module provides the ir communication functionality used by the game
-* to communicate between the two boards
+* @date 09-oct-2018
+*
+* @brief This module header provides the ir communication functionality to other
+*        modules of the game that require it.
 */
 
 
+// Defining constants and includes of the module if not already defined
 #ifndef COMMS_H
 #define COMMS_H
 
-#define WIN_CODE 12  // Just a random value
-#define START_CODE 33 // Another random value
+
+// Defining message code types and direction types used in communication
+// Arbitrary values have been chosen here to represent the different types and
+// directions
+#define WIN_CODE 12
+#define START_CODE 33
 #define BALL_CODE 5
-//Defining codes for all ball directions
 #define NORTH 25
 #define NORTH_EAST 26
 #define EAST 27
@@ -24,14 +30,22 @@
 #define WEST 31
 #define NORTH_WEST 32
 
+
+// Inlcuding modules used
+#include "ir_uart.h"
 #include "boing.h"
 
+
 /**
-* The data strucutre that is used to receive data from the other board
+* The data strucutre that is used to receive data from the other board. It holds
+* a message type as well as a ball y-coordinate and ball direction.
 */
 typedef struct data_s {
+    // Message type
     uint8_t type;
+    // Ball y-coordinate
     uint8_t ball_pos;
+    // Ball direction
     uint8_t ball_dir;
 } Data;
 
@@ -40,31 +54,33 @@ typedef struct data_s {
 
 
 /**
-* Used to intialise the ir_uart module. Returning 1 on success and 0 on fail
+* Intialising the communications for the game
 */
 void comms_init(void);
 
 
 /**
-* Sends a start signal to the other board. Returning 1 on success and 0 on fail
+* Sends a code to start the game to the other board
 */
 void send_start(void);
 
 
 /**
-* Sends a winning signal to the other board. Returning 1 on success
-* and 0 on fail
+* Sending a code to the other board informing it that it won the game
 */
 void send_won(void);
 
 
 /**
-* Sends a passed ball to the other board. Returning 1 on success and 0 on fail
+* Sends the ball to the other board, first a BALL_CODE is sent which is then
+* followed by the y-coordinate and then direction of the ball.
 */
 void send_ball(boing_state_t ball);
 
 
 /**
-* Reciving data from the other board
+* Reciving data from the other board, returns the data received in the form of
+* a Data struct variable, which holds the type of data that was received as well
+* as a ball y-coordinate and drection if a ball was received.
 */
 Data receiveData(void);

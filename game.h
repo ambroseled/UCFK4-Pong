@@ -1,23 +1,24 @@
 /**
-* Game module header
+* Game module header file
 * @team 128
 * @author Ambrose Ledbrook - 79172462
 * @author Josh Jarvis -
+* @date 12-oct-2018
 *
+* @brief This module header provides the constants and types used by the game
+*        module.
 */
 
 
+// Defining constants and typedefs used by the game module
 #ifndef GAME_H
 #define GAME_H
 
 
 // Defining rate constants used in the game
 #define PACER_RATE 300
-
 #define MESSAGE_RATE 15
-//TODO Check over
-#define BUTTON_RATE 300
-
+#define BUTTON_RATE 300 //TODO Check/change
 #define BALL_RATE 50
 
 
@@ -39,8 +40,8 @@ typedef enum {
 } Game_states;
 
 
-// Variable holding the current state of the game
-Game_states game_state;
+// Static variable holding the current state of the game
+static Game_states game_state;
 
 
 #endif

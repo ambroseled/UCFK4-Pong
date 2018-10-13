@@ -1,12 +1,16 @@
 /**
-* Message module source
+* Message module source code
 * @team 128
 * @author Ambrose Ledbrook - 79172462
-* @author Josh Jarvis - 
-* This module provides simple methods used to display messages to the player
+* @author Josh Jarvis -
+* @date 11-oct-2018
+*
+* @brief This module provides simple methods used to display messages to the
+*        player
 */
 
 
+// Including used modules
 #include "messages.h"
 #include "tinygl.h"
 
