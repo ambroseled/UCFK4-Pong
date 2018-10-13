@@ -26,6 +26,7 @@ static boing_state_t ball;
 * Intialising the state and postion of the ball
 */
 void ball_init(void) {
+    //TODO Make this random to get different directions
     ball = boing_init(0, 3, DIR_SW);
 }
 
