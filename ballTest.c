@@ -27,7 +27,7 @@ static boing_state_t ball;
 */
 void ball_init(void) {
     //TODO Make this random to get different directions
-    ball = boing_init(0, 3, DIR_SW);
+    ball = boing_init(4, 3, DIR_SE);
 }
 
 
@@ -44,20 +44,9 @@ void ball_update(void) {
 }
 
 
-void ball_reverse(void) {
-    // Removing current ball from ledmat
-    tinygl_draw_point(ball.pos, 0);
-    // Updating ball postion
-    ball = boing_reverse(ball);
-    // showing ball in its new postion
-    tinygl_draw_point(ball.pos, 1);
-}
-
-
 uint8_t check_paddle(void) {
     if (ball.pos.x == 4) {
         if (check_ball(ball.pos)) {
-            ball_reverse();
             return 1;
         } else {
             return 0;
@@ -137,4 +126,11 @@ uint8_t check_send(void) {
     } else {
         return 0;
     }
+}
+
+
+void reset_ball(void) {
+    ball.pos.x = 4;
+    ball.pos.y = 3;
+    ball.dir = DIR_SW;
 }
