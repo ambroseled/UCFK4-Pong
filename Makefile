@@ -16,7 +16,7 @@ all: game.out
 
 
 # Compile: create object files from C source files.
-game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h paddle.h ../../utils/pacer.h ../../utils/font.h messages.h ../../drivers/button.h comms.h game.h ../../drivers/led.h
+game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h paddle.h ../../utils/pacer.h ../../utils/font.h messages.h ../../drivers/button.h comms.h game.h ../../drivers/led.h ballTest.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers/navswitch.h ../../utils/tinygl.h
@@ -28,7 +28,10 @@ paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers
 messages.o: messages.c ../../utils/tinygl.h messages.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-comms.o: comms.c ../../drivers/avr/ir_uart.h comms.h
+comms.o: comms.c ../../drivers/avr/ir_uart.h ../../utils/boing.h comms.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
+ballTest.o: ballTest.c ../../utils/boing.h ../../utils/tinygl.h ballTest.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 pio.o: ../../drivers/avr/pio.c ../../drivers/avr/pio.h ../../drivers/avr/system.h
@@ -76,11 +79,14 @@ prescale.o: ../../drivers/avr/prescale.c ../../drivers/avr/prescale.h ../../driv
 led.o: ../../drivers/led.c ../../drivers/avr/system.h ../../drivers/avr/pio.h ../../drivers/led.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
+boing.o: ../../utils/boing.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../utils/boing.h
+	$(CC) -c $(CFLAGS) $< -o $@
+
 
 
 
 # Link: create ELF output file from object files.
-game.out: game.o paddle.o system.o display.o ledmat.o font.o tinygl.o pio.o navswitch.o pacer.o timer.o messages.o button.o comms.o ir_uart.o timer0.o usart1.o prescale.o led.o
+game.out: game.o paddle.o system.o display.o ledmat.o font.o tinygl.o pio.o navswitch.o pacer.o timer.o messages.o button.o comms.o ir_uart.o timer0.o usart1.o prescale.o led.o ballTest.o boing.o
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 

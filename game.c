@@ -16,6 +16,7 @@
 #include "comms.h"
 #include "game.h"
 #include "led.h"
+#include "ballTest.h"
 
 /*
 * Intialises the tinygl module used by the game
@@ -36,6 +37,7 @@ void tiny_init(void) {
 */
 void game_init(void) {
     system_init();
+    ball_init();
     tinygl_init(PACER_RATE);
     navswitch_init();
     paddle_init();
@@ -55,13 +57,6 @@ void game_init(void) {
 void paddle_task(void) {
     // Moving paddle
     paddle_move();
-}
-
-
-void ball_task(void) {
-    //TODO Move the ball here
-    //TODO Check ball collisons in other function from here
-    //TODO Send ball if reaches end from here
 }
 
 
@@ -92,8 +87,6 @@ void change_states(Game_states new_state) {
             break;
         case PLAYING :
             led_set(0, 1);
-            //TODO Send start signal to other board
-            //TODO initialise ball
             break;
         case WAITING :
             led_set(0, 0);
@@ -118,13 +111,26 @@ void button_task(void) {
 }
 
 
+void ball_task(void) {
+    //TODO Move the ball here
+    //TODO Check ball collisons in other function from here
+    //TODO Send ball if reaches end from here
+    if (check_send()) {
+        send_ball_pos();
+        change_states(WAITING);
+    } else {
+        ball_update();
+    }
+}
+
+
 /**
 * Receives data trough the ir receiver. If the data recieved matches the
 * defined start code then the game state is changed to PLAYING
 */
 void check_start(void) {
-    Data received = receiveData();
-    if (received.type == START_CODE) {
+    Data data = receiveData();
+    if (data.type == START_CODE) {
         clear_display();
         change_states(PLAYING);
     }
@@ -146,8 +152,8 @@ void check_ir(void) {
             change_states(WON);
             break;
         case BALL_CODE :
+            receiveBall(received.ball_pos);
             change_states(PLAYING);
-            //TODO Show the ball
             break;
         default :
             break;
@@ -162,7 +168,7 @@ int main(void) {
     game_init();
     show_welcome();
     uint8_t game_tick = 0;
-    uint8_t test_tick = 0;
+    uint8_t ball_tick = 0;
 
 
     //TODO Need to handle ball hitting paddle
@@ -172,8 +178,17 @@ int main(void) {
     while(1) {
         pacer_wait();
         game_tick++;
-        test_tick++;
-        //TODO Check for incoming messages
+        ball_tick++;
+
+        // Updating button and navswitch at 20 hertz
+        //TODO Check this and change BUTTON_RATE
+        if (game_tick == (PACER_RATE / BUTTON_RATE)) {
+            navswitch_update();
+            button_update();
+            game_tick = 0;
+        }
+        tinygl_update();
+
         switch(game_state) {
             case WON : // Fall through to NOT_STARTED state
             case LOST : // Fall through to NOT_STARTED state
@@ -182,8 +197,11 @@ int main(void) {
                 check_start();
                 break;
             case PLAYING :
-                //TODO ball movement
-                //ball_task();
+                if (ball_tick >= BALL_RATE) {
+                    ball_task();
+                    ball_tick = 0;
+                }
+
                 paddle_task();
                 break;
             case WAITING :
@@ -193,13 +211,5 @@ int main(void) {
                 break;
             break;
         }
-        // Updating button and navswitch at 20 hertz
-        if (game_tick = PACER_RATE / BUTTON_RATE) {
-            navswitch_update();
-            button_update();
-            game_tick = 0;
-        }
-        tinygl_update();
     }
-
 }

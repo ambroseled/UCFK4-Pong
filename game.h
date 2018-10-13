@@ -15,8 +15,10 @@
 #define PACER_RATE 300
 
 #define MESSAGE_RATE 15
+//TODO Check over
+#define BUTTON_RATE 300
 
-#define BUTTON_RATE 20
+#define BALL_RATE 35
 
 
 

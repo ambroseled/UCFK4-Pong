@@ -10,6 +10,7 @@
 
 #include "ir_uart.h"
 #include "comms.h"
+#include "boing.h"
 
 
 /**
@@ -38,38 +39,28 @@ void send_won(void) {
 
 /**
 * Sends the ball to the other board
+*/
+void send_ball(boing_state_t ball) {
+    // Sending a BALL_CODE
+    ir_uart_putc(BALL_CODE);
+    ir_uart_putc(ball.pos.y);
+}
 
-uint8_t send_ball(Ball ball) {
-    // Checking if ready to send
-    if (ir_uart_write_ready_p()) {
-        // Sending a BALL_CODE
-        ir_uart_putc(BALL_CODE);
-        //TODO Need to send ball postion here
-        // Returning 1 to indicate success
-        return 1;
-    } else {
-        // Send failed so returning 0
-        return 0;
-    }
-} */
 
-//TODO Alter once know how the ball is
 /**
 * Reciving data from the other board
 */
 Data receiveData(void) {
     // Initializing variables used to receive data
-    Data dataReceived = {0, 0};
-
-    // Checking if ready to receive
+    Data dataReceived = {0, 0, 0};
     if (ir_uart_read_ready_p()) {
         // Receiving data into the dataReceived variable
         dataReceived.type = ir_uart_getc();
-        /**
         // Ball has been received
-        if (dataReceived.data_type = BALL_CODE) {
-            //TODO get ball pos
-        }*/
+
+        if (dataReceived.type == BALL_CODE) {
+            dataReceived.ball_pos = ir_uart_getc();
+        }
     }
     // Returning the data that was received
     return dataReceived;

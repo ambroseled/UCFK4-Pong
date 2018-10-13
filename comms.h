@@ -15,7 +15,7 @@
 #define START_CODE 33 // Another random value
 #define BALL_CODE 5
 
-
+#include "boing.h"
 
 /**
 * The data strucutre that is used to receive data from the other board
@@ -51,9 +51,9 @@ void send_won(void);
 
 /**
 * Sends a passed ball to the other board. Returning 1 on success and 0 on fail
-
-uint8_t send_ball(Ball);
 */
+void send_ball(boing_state_t ball);
+
 
 /**
 * Reciving data from the other board
