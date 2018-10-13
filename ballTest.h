@@ -39,4 +39,7 @@ uint8_t check_lost(void);
 uint8_t check_paddle(void);
 
 
+void reset_ball(void);
+
+
 #endif

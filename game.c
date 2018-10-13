@@ -18,7 +18,6 @@
 #include "messages.h"
 #include "font3x5_1.h"
 #include "font.h"
-#include "button.h"
 #include "comms.h"
 #include "game.h"
 #include "led.h"
@@ -85,18 +84,6 @@ void change_states(Game_states new_state) {
     // Checking the new current state and performing actions if required
     // dependent on the current state
     switch (game_state) {
-        case WON :
-            // Showing a winning message and turing the led on
-            show_won();
-            led_set(0, 1);
-            break;
-        case LOST :
-            // Showing a losing message, turing the led ff and notifying the
-            // other board that they won the game
-            show_lost();
-            send_won();
-            led_set(0, 0);
-            break;
         case PLAYING :
             // Turning the led on
             led_set(0, 1);
@@ -115,7 +102,7 @@ void change_states(Game_states new_state) {
 */
 void button_task(void) {
     // Chekcing for a button event
-    if (button_push_event_p(0)) {
+    if (navswitch_push_event_p(4)) {
         // Clearing the display
         clear_display();
         // Updating the game state to WAITING
@@ -133,15 +120,17 @@ void button_task(void) {
 void ball_task(void) {
     //TODO Check ball collisons with function in ball module
     if (check_send()) {
-        // sending the ball
+        // Sending the ball
         send_ball_pos();
         // Changing states to wait for the ball to return
         change_states(WAITING);
     } else {
-        // updating the postion of the ball
         if (!check_paddle()) {
             clear_display();
-            change_states(LOST);
+            show_lost();
+            send_won();
+            led_set(0, 0);
+            change_states(NOT_STARTED);
         } else {
             ball_update();
         }
@@ -160,6 +149,7 @@ void check_start(void) {
     if (data.type == START_CODE) {
         // Clearing the display and changing the game state to PLAYING
         clear_display();
+        reset_ball();
         change_states(PLAYING);
     }
 }
@@ -179,7 +169,9 @@ void check_ir(void) {
         case WIN_CODE :
             // Clearing the display and showing the winning message
             clear_display();
-            change_states(WON);
+            show_won();
+            led_set(0, 1);
+            change_states(NOT_STARTED);
             break;
         case BALL_CODE :
             // Receiving the ball from the other board
@@ -225,8 +217,6 @@ int main(void) {
         tinygl_update();
         // Checking the curent game state
         switch(game_state) {
-            case WON : // Fall through to NOT_STARTED state
-            case LOST : // Fall through to NOT_STARTED state
             case NOT_STARTED :
                 // chekcing for a button press or START_CODE to start the game
                 button_task();

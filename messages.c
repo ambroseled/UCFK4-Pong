@@ -27,7 +27,7 @@ void show_welcome(void) {
 * Showing text indicating a win on the board
 */
 void show_won(void) {
-    tinygl_text("YOU WON!! :)  PRESS BUTTON TO RESTART");
+    tinygl_text("YOU WON!! :)  PRESS TO RESTART");
 }
 
 
@@ -35,5 +35,5 @@ void show_won(void) {
 * Showing text indicating a loss on the board
 */
 void show_lost(void) {
-    tinygl_text("YOU LOST :(   PRESS BUTTON TO RESTART");
+    tinygl_text("YOU LOST :(   PRESS TO RESTART");
 }
