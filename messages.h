@@ -14,8 +14,8 @@
 #ifndef PADDLE_H
 #define PADDLE_H
 #define EASY "70"
-#define MEDIUM "55"
-#define HARD "35"
+#define MEDIUM "75"
+#define HARD "55"
 
 
 // Inlcuding the tinygl module used by the module
