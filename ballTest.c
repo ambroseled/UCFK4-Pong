@@ -47,6 +47,7 @@ void ball_update(void) {
 uint8_t check_paddle(void) {
     if (ball.pos.x == 4) {
         if (check_ball(ball.pos)) {
+            paddle_reverse(ball);// Reverse functon
             return 1;
         } else {
             return 0;
@@ -56,6 +57,13 @@ uint8_t check_paddle(void) {
     }
 }
 
+void paddle_reverse (boing_state_t ball)
+{
+    boing_dir_t newdir[] = {DIR_S, DIR_SE, DIR_W, DIR_NE,
+                            DIR_N, DIR_NW, DIR_E, DIR_SW};
+
+    ball.dir = newdir[ball.dir];
+}
 
 /**
 * Sending the postion and direction of the ball to the other board over
