@@ -48,29 +48,14 @@ uint8_t get_dir(boing_dir_t ball_dir) {
     uint8_t to_send = 0;
     // Finding what direction was passed
     switch (ball_dir) {
-        case DIR_N :
-            to_send = NORTH;
-            break;
-        case DIR_NE :
+        case DIR_SW :
             to_send = NORTH_EAST;
             break;
-        case DIR_E :
+        case DIR_W :
             to_send = EAST;
             break;
-        case DIR_SE :
-            to_send = SOUTH_EAST;
-            break;
-        case DIR_S :
-            to_send = SOUTH;
-            break;
-        case DIR_SW :
-            to_send = SOUTH_WEST;
-            break;
-        case DIR_W :
-            to_send = WEST;
-            break;
         case DIR_NW :
-            to_send = NORTH_WEST;
+            to_send = SOUTH_EAST;
             break;
         default :
             break;
