@@ -35,7 +35,7 @@ typedef struct paddle {
     tinygl_point_t right;
 } Paddle;
 
-
+static Paddle paddle;
 /**
 * This function is used to initialize the state of the paddle.
 * It sets the initial postion of the paddle

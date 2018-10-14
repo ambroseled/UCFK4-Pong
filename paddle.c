@@ -15,8 +15,6 @@
 #include "navswitch.h"
 
 
-// Variable to hold the paddle
-Paddle paddle;
 
 
 /**
