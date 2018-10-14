@@ -73,3 +73,9 @@ uint8_t check_ball(tinygl_point_t pos) {
         return 0;
     }
 }
+
+
+
+uint8_t get_paddle_center(void) {
+    return paddle.left.y - paddle.right.y;
+}

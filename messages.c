@@ -19,7 +19,7 @@
 * Showing the welcome text on the board
 */
 void show_welcome(void) {
-    tinygl_text("PRESS BUTTON TO START");
+    tinygl_text("PRESS NAVSWITCH TO START");
 }
 
 
