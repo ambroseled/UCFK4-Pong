@@ -59,4 +59,7 @@ void paddle_move(void);
 uint8_t check_ball(tinygl_point_t pos);
 
 
+uint8_t get_paddle_center(void);
+
+
 #endif

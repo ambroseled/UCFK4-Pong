@@ -16,18 +16,38 @@
 #include "tinygl.h"
 #include "comms.h"
 #include "paddle.h"
+#include <stdlib.h>
 
 
 // boing_state_t variable which holds the postion and direction of the ball
 static boing_state_t ball;
 
 
+boing_dir_t get_rand_dir(void) {
+    uint8_t index = rand() % 4;
+    boing_dir_t dir = DIR_NE;
+    switch(index) {
+        case 0 :
+            dir = DIR_NE;
+            break;
+        case 1 :
+            dir = DIR_SE;
+            break;
+        case 2 :
+            dir = DIR_SW;
+            break;
+        case 3 :
+            dir = DIR_NW;
+            break;
+    }
+    return dir;
+}
+
 /**
 * Intialising the state and postion of the ball
 */
 void ball_init(void) {
-    //TODO Make this random to get different directions
-    ball = boing_init(4, 3, DIR_SE);
+    ball = boing_init(4, 3, get_rand_dir());
 }
 
 
@@ -139,6 +159,6 @@ uint8_t check_send(void) {
 
 void reset_ball(void) {
     ball.pos.x = 4;
-    ball.pos.y = 3;
-    ball.dir = DIR_SW;
+    ball.pos.y = get_paddle_center();
+    ball.dir = get_rand_dir();
 }
