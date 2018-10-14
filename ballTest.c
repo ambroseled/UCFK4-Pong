@@ -64,27 +64,27 @@ void ball_update(void) {
 }
 
 
-boing_state_t paddle_reverse (boing_state_t ball)
-{
-      tinygl_point_t hops[] = {{0, 1}, {1, 1}, {1, 0}, {1, -1},
-                           {0, -1}, {-1, -1}, {-1, 0}, {-1, 1}};
-      boing_dir_t newdir[] = {DIR_S, DIR_NW, DIR_E, DIR_SW,
-                              DIR_N, DIR_SE, DIR_W, DIR_NE};
-      ball.pos.y -= hops[ball.dir].y;
-      ball.dir = newdir[ball.dir];
+// boing_state_t paddle_reverse (boing_state_t ball)
+// {
+//       tinygl_point_t hops[] = {{0, 1}, {-1, 1}, {1, 0}, {-1, -1},
+//                            {0, -1}, {1, -1}, {-1, 0}, {1, 1}};
+//       boing_dir_t newdir[] = {DIR_S, DIR_NW, DIR_E, DIR_SW,
+//                               DIR_N, DIR_SE, DIR_W, DIR_NE};
+//       ball.pos.y -= hops[ball.dir].y;
+//       ball.dir = newdir[ball.dir];
+//
+//     return ball;
+// }
 
-    return ball;
-}
 
-
-void ball_reverse(void) {
-    // Removing current ball from ledmat
-    tinygl_draw_point(ball.pos, 0);
-    // Updating ball postion
-    ball = paddle_reverse(ball);
-    // showing ball in its new postion
-    tinygl_draw_point(ball.pos, 1);
-}
+// void ball_reverse(void) {
+//     // Removing current ball from ledmat
+//     tinygl_draw_point(ball.pos, 0);
+//     // Updating ball postion
+//     ball = paddle_reverse(ball);
+//     // showing ball in its new postion
+//     tinygl_draw_point(ball.pos, 1);
+// }
 
 
 uint8_t check_paddle(void) {
@@ -94,11 +94,11 @@ uint8_t check_paddle(void) {
         } else {
             return 0;
         }
-    } else if (ball.pos.x == 3){
-        if (check_ball(ball.pos)) {
-          ball_reverse();
-          return 1;
-        }
+    // } else if (ball.pos.x == 3){
+    //     if (check_ball(ball.pos)) {
+    //       ball_reverse();
+    //       return 1;
+    //     }
     }
     return 1;
 }
