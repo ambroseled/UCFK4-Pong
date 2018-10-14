@@ -264,6 +264,7 @@ int main(void) {
             case MENU :
                 change_speed();
                 button_task();
+                check_start();
                 break;
             case PLAYING :
                 // If updating ball every 50 game ticks
