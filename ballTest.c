@@ -92,11 +92,11 @@ uint8_t check_paddle(void) {
             return 0;
         }
     } else if (ball.pos.x == 3){
-        if (((paddle.left.y + 1) == ball.pos.y) && ball.dir == DIR_NE) {
+        if (((paddle.left.y + 1) == ball.pos.y) && ball.dir == DIR_SE) {
           ball_reverse();
         }
 
-        if (((paddle.right.y - 1) == ball.pos.y) && ball.dir == DIR_SE) {
+        if (((paddle.right.y - 1) == ball.pos.y) && ball.dir == DIR_NE) {
           ball_reverse();
         }
 
