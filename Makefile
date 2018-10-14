@@ -84,19 +84,9 @@ boing.o: ../../utils/boing.c ../../drivers/avr/system.h ../../utils/tinygl.h ../
 
 
 # Link: create ELF output file from object files.
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-game.out: game.o paddle.o system.o display.o ledmat.o font.o tinygl.o pio.o navswitch.o pacer.o timer.o messages.o button.o task.o timer.o
-=======
-game.out: game.o paddle.o system.o display.o ledmat.o font.o tinygl.o pio.o navswitch.o pacer.o timer.o messages.o button.o comms.o ir_uart.o timer0.o usart1.o prescale.o
->>>>>>> 6dd508b1c9fb71c6874c939ab2fb2650351ab909
-=======
 game.out: game.o paddle.o system.o display.o ledmat.o font.o tinygl.o pio.o navswitch.o pacer.o timer.o messages.o button.o comms.o ir_uart.o timer0.o usart1.o prescale.o led.o ballTest.o boing.o
->>>>>>> 54cea97a4a6150601e1708755fe982e286493ae9
-=======
-game.out: game.o paddle.o system.o display.o ledmat.o font.o tinygl.o pio.o navswitch.o pacer.o timer.o messages.o comms.o ir_uart.o timer0.o usart1.o prescale.o led.o ballTest.o boing.o
->>>>>>> a85ff6a659324fe477b92dc6e50cfdba7457c75a
+
+
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 
