@@ -24,20 +24,14 @@ static boing_state_t ball;
 
 
 boing_dir_t get_rand_dir(void) {
-    uint8_t index = rand() % 4;
+    uint8_t index = rand() % 2;
     boing_dir_t dir = DIR_NE;
     switch(index) {
         case 0 :
-            dir = DIR_NE;
+            dir = DIR_NW;
             break;
         case 1 :
-            dir = DIR_SE;
-            break;
-        case 2 :
             dir = DIR_SW;
-            break;
-        case 3 :
-            dir = DIR_NW;
             break;
     }
     return dir;
@@ -174,6 +168,9 @@ uint8_t check_send(void) {
 }
 
 
+/**
+* Resetting the postion of the ball to default. Used when the game is restarted
+*/
 void reset_ball(void) {
     ball.pos.x = 4;
     ball.pos.y = get_paddle_center();

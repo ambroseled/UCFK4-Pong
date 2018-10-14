@@ -160,11 +160,7 @@ void check_start(void) {
         clear_display();
         reset_ball();
         change_states(PLAYING);
-    } else if (data.type == START_CODE) {
-        clear_display();
-        reset_ball();
-        change_states(PLAYING);
-    }
+    } 
 }
 
 

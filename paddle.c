@@ -77,5 +77,5 @@ uint8_t check_ball(tinygl_point_t pos) {
 
 
 uint8_t get_paddle_center(void) {
-    return paddle.right.y - paddle.left.y;
+    return (paddle.left.y + paddle.right.y) / 2;
 }
