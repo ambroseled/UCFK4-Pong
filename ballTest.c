@@ -131,9 +131,6 @@ void receiveBall(uint8_t pos, uint8_t dir) {
     ball.pos.y = pos;
     // setting the direction of the ball
     switch (dir) {
-        case NORTH :
-            ball.dir = DIR_N;
-            break;
         case NORTH_EAST :
             ball.dir = DIR_NE;
             break;
@@ -143,24 +140,12 @@ void receiveBall(uint8_t pos, uint8_t dir) {
         case SOUTH_EAST :
             ball.dir = DIR_SE;
             break;
-        case SOUTH :
-            ball.dir = DIR_S;
-            break;
-        case SOUTH_WEST :
-            ball.dir = DIR_SW;
-            break;
-        case WEST :
-            ball.dir = DIR_W;
-            break;
-        case NORTH_WEST :
-            ball.dir = DIR_NW;
-            break;
     }
     // Showing the ball on the ledmat
     tinygl_draw_point(ball.pos, 1);
     // Updating the postion of the ball
     // TODO Check over maybe remove
-    ball_update();
+    //ball_update();
 }
 
 
@@ -171,7 +156,7 @@ void receiveBall(uint8_t pos, uint8_t dir) {
 * ledmat. Returns 1 if the ball is to be sent and 0 otherwise.
 */
 uint8_t check_send(void) {
-    if (ball.pos.x == 0) {
+    if (ball.pos.x == 0 && (ball.dir == DIR_W || ball.dir == DIR_SW || ball.dir == DIR_NW)) {
         return 1;
     } else {
         return 0;
