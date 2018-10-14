@@ -23,7 +23,7 @@
 */
 void paddle_init(void) {
     // Setting the initial postions of the paddle
-    tinygl_point_t left = tinygl_point(4, 4);
+    tinygl_point_t left = tinygl_point(4, 3);
     tinygl_point_t right = tinygl_point(4, 2);
     // Intialising the paddle points
     paddle.left = left;
