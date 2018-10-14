@@ -9,7 +9,13 @@ A simple implementation of pong using two ucfk4 boards. Developed by:
   senders facing each other
 - In terminal navigate to the root of the group128 folder
 - Run `make clean program` for both boards
-- Press the button on one of the boards to start the game
+- Press the navswtich move to game difficulty selection
+    * The game difficulty relates to the ball speed
+        - Easy - 70
+        - Medium - 55
+        - Hard - 35
+- Use the navswitch to select the game difficulty
+- Confirm difficulty by pressing the navswitch
 - Use the navswitch to control the game
 - The active player will be indicated by the blue led
 
