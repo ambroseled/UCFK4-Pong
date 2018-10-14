@@ -18,10 +18,16 @@ A simple implementation of pong using two ucfk4 boards. Developed by:
 ## The Game
 - The goal of the game is to win by causing the other player to miss the ball
 - Use your paddle to bounce the ball back onto the other players screen and
-  stop it from hitting the back of your screen.
+  stop it from hitting the back of your screen
 
 ## Game Difficulty
 - The game difficulty relates to the ball speed
     * Easy - 70
     * Medium - 55
     * Hard - 35
+
+## Winning / Losing the Game
+- When the game is over the winner's boad will display `You Won!! :)` as well
+  as the led turning on and the losing board will display `You Lost :(`
+- The game can then be restarted by pressing the navswitch and then re-selecting
+  a difficulty
