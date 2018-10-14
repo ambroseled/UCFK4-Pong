@@ -13,6 +13,9 @@
 // Defining inlcudes used by the module
 #ifndef PADDLE_H
 #define PADDLE_H
+#define EASY "70"
+#define MEDIUM "55"
+#define HARD "35"
 
 
 // Inlcuding the tinygl module used by the module
@@ -38,3 +41,6 @@ void show_won(void);
 * Showing text indicating a loss on the board
 */
 void show_lost(void);
+
+
+void show_speed(uint8_t index);

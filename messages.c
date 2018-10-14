@@ -23,6 +23,23 @@ void show_welcome(void) {
 }
 
 
+void show_speed(uint8_t index) {
+    switch (index) {
+        case 0 :
+            tinygl_text(EASY);
+            break;
+        case 1 :
+            tinygl_text(MEDIUM);
+            break;
+        case 2 :
+            tinygl_text(HARD);
+            break;
+        default :
+            break;
+    }
+}
+
+
 /**
 * Showing text indicating a win on the board
 */

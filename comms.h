@@ -21,6 +21,7 @@
 #define WIN_CODE 12
 #define START_CODE 33
 #define BALL_CODE 5
+#define SPEED_CODE 3
 #define NORTH 25
 #define NORTH_EAST 26
 #define EAST 27
@@ -84,3 +85,6 @@ void send_ball(boing_state_t ball);
 * as a ball y-coordinate and drection if a ball was received.
 */
 Data receiveData(void);
+
+
+void send_speed(uint8_t speed);

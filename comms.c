@@ -112,7 +112,16 @@ Data receiveData(void) {
             dataReceived.ball_pos = ir_uart_getc();
             dataReceived.ball_dir = ir_uart_getc();
         }
+        if (dataReceived.type == SPEED_CODE) {
+            dataReceived.ball_pos = ir_uart_getc();
+        }
     }
     // Returning the data that was received
     return dataReceived;
+}
+
+
+void send_speed(uint8_t speed) {
+    ir_uart_putc(SPEED_CODE);
+    ir_uart_putc(speed);
 }
