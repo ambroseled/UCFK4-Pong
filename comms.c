@@ -106,7 +106,12 @@ Data receiveData(void) {
 }
 
 
+/**
+* Sending the chosen ball speed to the other board
+*/
 void send_speed(uint8_t speed) {
+    // Sending SPEED_CODE
     ir_uart_putc(SPEED_CODE);
+    // Sending the ball speed
     ir_uart_putc(speed);
 }

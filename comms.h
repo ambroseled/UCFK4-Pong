@@ -87,4 +87,7 @@ void send_ball(boing_state_t ball);
 Data receiveData(void);
 
 
+/**
+* Sending the chosen ball speed to the other board
+*/
 void send_speed(uint8_t speed);

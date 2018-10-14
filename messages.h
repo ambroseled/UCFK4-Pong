@@ -43,4 +43,7 @@ void show_won(void);
 void show_lost(void);
 
 
+/**
+* Displaying a passed ball speed on the ledmat
+*/
 void show_speed(uint8_t index);

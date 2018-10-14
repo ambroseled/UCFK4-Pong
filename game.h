@@ -40,12 +40,10 @@ typedef enum {
 } Game_states;
 
 
+// Static variable holding values used to run the game
+static Game_states game_state;
 static uint8_t speed_index = 0;
 static uint8_t ball_speed = EASY;
-
-
-// Static variable holding the current state of the game
-static Game_states game_state;
 
 
 #endif

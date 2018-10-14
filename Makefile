@@ -17,7 +17,7 @@ all: game.out
 
 
 # Compile: create object files from C source files.
-game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h paddle.h ../../utils/pacer.h ../../utils/font.h messages.h comms.h game.h ../../drivers/led.h ballTest.h
+game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h paddle.h ../../utils/pacer.h ../../utils/font.h messages.h comms.h game.h ../../drivers/led.h ball.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers/navswitch.h ../../utils/tinygl.h paddle.h
@@ -32,7 +32,7 @@ messages.o: messages.c ../../utils/tinygl.h messages.h
 comms.o: comms.c ../../drivers/avr/ir_uart.h ../../utils/boing.h comms.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
-ballTest.o: ballTest.c ../../utils/boing.h ../../utils/tinygl.h paddle.h ballTest.h
+ball.o: ball.c ../../utils/boing.h ../../utils/tinygl.h paddle.h ball.h
 	$(CC) -c $(CFLAGS) $< -o $@
 
 pio.o: ../../drivers/avr/pio.c ../../drivers/avr/pio.h ../../drivers/avr/system.h

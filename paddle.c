@@ -15,8 +15,6 @@
 #include "navswitch.h"
 
 
-
-
 /**
 * This function is used to initialize the state of the paddle.
 * It sets the initial postion of the paddle
@@ -64,6 +62,10 @@ void paddle_move(void) {
 }
 
 
+/**
+* Checking if the passed ball postion is within the paddle. Returning 1 if the
+* ball is within the paddle and 0 otherwise
+*/
 uint8_t check_ball(tinygl_point_t pos) {
     if (pos.y >= paddle.right.y && pos.y <= paddle.left.y) {
         return 1;
@@ -73,7 +75,9 @@ uint8_t check_ball(tinygl_point_t pos) {
 }
 
 
-
+/**
+* Getting the center y coordinate of the paddle
+*/
 uint8_t get_paddle_center(void) {
     return (paddle.left.y + paddle.right.y) / 2;
 }
