@@ -64,26 +64,45 @@ void ball_update(void) {
 }
 
 
+// boing_state_t paddle_reverse (boing_state_t ball)
+// {
+//       tinygl_point_t hops[] = {{0, 1}, {-1, 1}, {1, 0}, {-1, -1},
+//                            {0, -1}, {1, -1}, {-1, 0}, {1, 1}};
+//       boing_dir_t newdir[] = {DIR_S, DIR_NW, DIR_E, DIR_SW,
+//                               DIR_N, DIR_SE, DIR_W, DIR_NE};
+//       ball.pos.y -= hops[ball.dir].y;
+//       ball.dir = newdir[ball.dir];
+//
+//     return ball;
+// }
+
+
+// void ball_reverse(void) {
+//     // Removing current ball from ledmat
+//     tinygl_draw_point(ball.pos, 0);
+//     // Updating ball postion
+//     ball = paddle_reverse(ball);
+//     // showing ball in its new postion
+//     tinygl_draw_point(ball.pos, 1);
+// }
+
+
 uint8_t check_paddle(void) {
     if (ball.pos.x == 4) {
         if (check_ball(ball.pos)) {
-            paddle_reverse(ball);// Reverse functon
             return 1;
         } else {
             return 0;
         }
-    } else {
-        return 1;
+    // } else if (ball.pos.x == 3){
+    //     if (check_ball(ball.pos)) {
+    //       ball_reverse();
+    //       return 1;
+    //     }
     }
+    return 1;
 }
 
-void paddle_reverse (boing_state_t ball)
-{
-    boing_dir_t newdir[] = {DIR_S, DIR_SE, DIR_W, DIR_NE,
-                            DIR_N, DIR_NW, DIR_E, DIR_SW};
-
-    ball.dir = newdir[ball.dir];
-}
 
 /**
 * Sending the postion and direction of the ball to the other board over
@@ -140,8 +159,6 @@ void receiveBall(uint8_t pos, uint8_t dir) {
 }
 
 
-//TODO reverse direction of ball if it hits the paddle
-//TODO check if ball hits back of ledmat
 
 /**
 * Checking if the ball needs to be sent to the other board. The ball will be
