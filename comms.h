@@ -75,6 +75,7 @@ void send_won(void);
 /**
 * Sends the ball to the other board, first a BALL_CODE is sent which is then
 * followed by the y-coordinate and then direction of the ball.
+* @param The game ball
 */
 void send_ball(boing_state_t ball);
 
@@ -83,11 +84,13 @@ void send_ball(boing_state_t ball);
 * Reciving data from the other board, returns the data received in the form of
 * a Data struct variable, which holds the type of data that was received as well
 * as a ball y-coordinate and drection if a ball was received.
+* @return The data received for the other board
 */
 Data receiveData(void);
 
 
 /**
 * Sending the chosen ball speed to the other board
+* @param The speed of the ball
 */
 void send_speed(uint8_t speed);

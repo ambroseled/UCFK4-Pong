@@ -13,9 +13,9 @@
 // Defining inlcudes used by the module
 #ifndef PADDLE_H
 #define PADDLE_H
-#define EASY "70"
-#define MEDIUM "75"
-#define HARD "55"
+#define EASY "1"
+#define MEDIUM "2"
+#define HARD "3"
 
 
 // Inlcuding the tinygl module used by the module
@@ -45,5 +45,6 @@ void show_lost(void);
 
 /**
 * Displaying a passed ball speed on the ledmat
+* @param The index to the speed to display
 */
 void show_speed(uint8_t index);

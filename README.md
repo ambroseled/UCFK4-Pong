@@ -21,10 +21,10 @@ A simple implementation of pong using two ucfk4 boards. Developed by:
 - The active player will be indicated by the blue led
 
 ## Game Difficulty
-- The game difficulty relates to the ball speed
-    * Easy - 90
-    * Medium - 75
-    * Hard - 55
+- The game has 3 different difficulty levels
+    * Easy - 1
+    * Medium - 2
+    * Hard - 3
 
 ## Winning / Losing the Game
 - When the game is over the winner's boad will display `You Won!! :)` as well

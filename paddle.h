@@ -61,14 +61,16 @@ void paddle_move(void);
 
 
 /**
-* Checking if the passed ball postion is within the paddle. Returning 1 if the
-* ball is within the paddle and 0 otherwise
+* Checking if the passed ball postion is within the paddle.
+* @param A tinygl_point_t which is the game balls postion
+* @return 1 if the ball is within the paddle, 0 otherwise
 */
 uint8_t check_ball(tinygl_point_t pos);
 
 
 /**
 * Getting the center y coordinate of the paddle
+* @return The center y coordinate of the paddle
 */
 uint8_t get_paddle_center(void);
 

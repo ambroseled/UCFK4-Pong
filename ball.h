@@ -40,6 +40,8 @@ void send_ball_pos(void);
 /**
 * Processing a ball that was received from the other board. Takes a y-coordinate
 * and a direction and updates the ball to match.
+* @param pos the y coordinate received for the ball
+* @param dir the direction received for the ball
 */
 void receiveBall(uint8_t pos, uint8_t dir);
 
@@ -47,14 +49,16 @@ void receiveBall(uint8_t pos, uint8_t dir);
 /**
 * Checking if the ball needs to be sent to the other board. The ball will be
 * sent to the other board if its x-coordinate is 0 which is the top row of the
-* ledmat. Returns 1 if the ball is to be sent and 0 otherwise.
+* ledmat.
+* @return 1 if the ball is to be sent 0 otherwise
 */
 uint8_t check_send(void);
 
 
 /**
-* Used to check if the ball has hit the paddle. Returning 1 if the ball is
-* within the paddle and 0 if not.
+* Used to check if the ball has hit the paddle. Also handling the ball
+* bouncing off the paddle.
+* @return 0 if ball is on back of screen 1 otherwise
 */
 uint8_t check_paddle(void);
 
