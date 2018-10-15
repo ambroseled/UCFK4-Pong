@@ -2,7 +2,7 @@
 * Ball module source code
 * @team 128
 * @author Ambrose Ledbrook - 79172462
-* @author Josh Jarvis -
+* @author Josh Jarvis - 28803714
 * @date 13-oct-2018
 *
 * @brief This module provides the ball functionality to the game through the use  of

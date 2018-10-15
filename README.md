@@ -2,7 +2,7 @@
 
 A simple implementation of pong using two ucfk4 boards. Developed by:
 - `Ambrose Ledbrook | 79172462`
-- `Josh Jarvis | `
+- `Josh Jarvis | 28803714`
 
 ## Usage
 1. Set up boards in a dimely lit area close together with ir receivers and

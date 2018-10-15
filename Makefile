@@ -1,6 +1,6 @@
 # File:   Makefile
 # Author: Ambrose Ledbrook - 79172462
-# Author: Josh Jarvis -
+# Author: Josh Jarvis - 28803714
 # Date:  04-oct-2018
 # Descr:  Makefile for Pong Game
 
