@@ -18,17 +18,12 @@
 // Defining rate constants used in the game
 #define PACER_RATE 300
 #define MESSAGE_RATE 15
-#define BUTTON_RATE 300 //TODO Check/change
+#define BUTTON_RATE 300
 #define BALL_RATE 70
-<<<<<<< HEAD
 #define EASY 90
-#define MEDIUM 55
-#define HARD 35
-=======
-#define EASY 70
 #define MEDIUM 75
-#define HARD 55
->>>>>>> 7fac38fa3d7fd12494bac5b0275db30b8bd6ad8f
+#define HARD 45
+
 
 
 /**

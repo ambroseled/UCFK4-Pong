@@ -31,7 +31,7 @@ static boing_state_t ball;
 boing_dir_t get_rand_dir(void) {
     // Generating number
     uint8_t index = rand() % 2;
-    boing_dir_t dir = DIR_NE;
+    boing_dir_t dir = DIR_N;
     // Getting direction from index
     switch(index) {
         case 0 :
