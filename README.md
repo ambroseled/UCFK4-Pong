@@ -34,7 +34,7 @@ A simple implementation of pong using two ucfk4 boards. Developed by:
   a difficulty
 
 ## Game Menu
-1. The game menu first gives a greeting 'Welcome to pong'
+1. The game menu first gives a greeting `Welcome to pong`
 2. Then with a push of the navswitch you move on to difficulty selection
 3. Once difficulty is confirmed through a push of the navswitch the game will
    start
