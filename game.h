@@ -20,9 +20,9 @@
 #define MESSAGE_RATE 15
 #define BUTTON_RATE 300 //TODO Check/change
 #define BALL_RATE 70
-#define EASY 70
+#define EASY 90
 #define MEDIUM 75
-#define HARD 55
+#define HARD 45
 
 
 /**
