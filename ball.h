@@ -15,7 +15,7 @@
 #define BALLTEST_H
 
 
-#include "ballTest.h"
+#include "ball.h"
 
 
 /**
