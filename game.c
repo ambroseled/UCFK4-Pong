@@ -21,8 +21,7 @@
 #include "comms.h"
 #include "game.h"
 #include "led.h"
-#include "ballTest.h"
-
+#include "ball.h"
 
 
 /*
@@ -160,16 +159,22 @@ void check_start(void) {
         clear_display();
         reset_ball();
         change_states(PLAYING);
-    } 
+    }
 }
 
 
+/**
+* 
+*/
 void update_index(uint8_t to_add) {
     speed_index += to_add;
     speed_index = speed_index % 3;
 }
 
 
+/**
+*
+*/
 void change_speed(void) {
     if (navswitch_push_event_p(NAVSWITCH_NORTH)) {
         update_index(1);

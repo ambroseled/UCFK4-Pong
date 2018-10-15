@@ -23,7 +23,12 @@ void show_welcome(void) {
 }
 
 
+/**
+* Displaying a passed ball speed on the ledmat
+* @param The index to the speed to display
+*/
 void show_speed(uint8_t index) {
+    // Displaying a speed dependent on the passed index
     switch (index) {
         case 0 :
             tinygl_text(EASY);

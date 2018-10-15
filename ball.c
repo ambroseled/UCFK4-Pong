@@ -23,9 +23,16 @@
 static boing_state_t ball;
 
 
+/**
+* Generates a random value between 0 and 1 which corresponds to the directions
+* North west and North east. This is used to make the ball seem more random.
+* @return A random boing_dir_t which is either DIR_NW, DIR_SW
+*/
 boing_dir_t get_rand_dir(void) {
+    // Generating number
     uint8_t index = rand() % 2;
     boing_dir_t dir = DIR_NE;
+    // Getting direction from index
     switch(index) {
         case 0 :
             dir = DIR_NW;
@@ -36,6 +43,7 @@ boing_dir_t get_rand_dir(void) {
     }
     return dir;
 }
+
 
 /**
 * Intialising the state and postion of the ball
@@ -58,6 +66,9 @@ void ball_update(void) {
 }
 
 
+/**
+* Swithcing the direction of the ball when it hits the paddle
+*/
 void paddle_reverse (void)
 {
   switch(ball.dir) {
@@ -70,10 +81,12 @@ void paddle_reverse (void)
     default :
       break;
   }
-
 }
 
 
+/**
+* Reversing the direction os the ball.
+*/
 void ball_reverse(void) {
     // Removing current ball from ledmat
     tinygl_draw_point(ball.pos, 0);
@@ -84,25 +97,32 @@ void ball_reverse(void) {
 }
 
 
+/**
+* Used to check if the ball has hit the paddle. Also handling the ball
+* bouncing off the paddle.
+* @return 0 if ball is on back of screen 1 otherwise
+*/
 uint8_t check_paddle(void) {
+    // Checking the ball is on the bottom layer of the ledmat
     if (ball.pos.x == 4) {
+        // Checking if the ball is within the paddle
         if (check_ball(ball.pos)) {
             return 1;
         } else {
+            // Ball is not within the paddle and the game is over
             return 0;
         }
+        // Checking if the ball is one layer above the paddle
     } else if (ball.pos.x == 3){
-        if (((paddle.left.y + 1) == ball.pos.y) && ball.dir == DIR_NE) {
-          ball_reverse();
+        // Checking edge cases where the ball hits the side of the paddle
+        if (((paddle.left.y + 1) == ball.pos.y) && ball.dir == DIR_SE) {
+            ball_reverse();
+        } else if (((paddle.right.y - 1) == ball.pos.y) && ball.dir == DIR_NE) {
+            ball_reverse();
         }
-
-        if (((paddle.right.y - 1) == ball.pos.y) && ball.dir == DIR_SE) {
-          ball_reverse();
-        }
-
+        // Checking if ball is over the paddle
         if (check_ball(ball.pos)) {
-          paddle_reverse();
-          return 1;
+            paddle_reverse();
         }
     }
     return 1;
@@ -124,6 +144,8 @@ void send_ball_pos(void) {
 /**
 * Processing a ball that was received from the other board. Takes a y-coordinate
 * and a direction and updates the ball to match.
+* @param pos the y coordinate received for the ball
+* @param dir the direction received for the ball
 */
 void receiveBall(uint8_t pos, uint8_t dir) {
     // Setting x and y postions of the ball
@@ -143,9 +165,6 @@ void receiveBall(uint8_t pos, uint8_t dir) {
     }
     // Showing the ball on the ledmat
     tinygl_draw_point(ball.pos, 1);
-    // Updating the postion of the ball
-    // TODO Check over maybe remove
-    //ball_update();
 }
 
 
@@ -153,9 +172,11 @@ void receiveBall(uint8_t pos, uint8_t dir) {
 /**
 * Checking if the ball needs to be sent to the other board. The ball will be
 * sent to the other board if its x-coordinate is 0 which is the top row of the
-* ledmat. Returns 1 if the ball is to be sent and 0 otherwise.
+* ledmat.
+* @return 1 if the ball is to be sent 0 otherwise
 */
 uint8_t check_send(void) {
+    // Checking if send conditions are met
     if (ball.pos.x == 0 && (ball.dir == DIR_W || ball.dir == DIR_SW || ball.dir == DIR_NW)) {
         return 1;
     } else {
@@ -169,6 +190,8 @@ uint8_t check_send(void) {
 */
 void reset_ball(void) {
     ball.pos.x = 4;
+    // Getting center postion of the paddle
     ball.pos.y = get_paddle_center();
+    // Getting random direction
     ball.dir = get_rand_dir();
 }
