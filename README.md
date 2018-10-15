@@ -5,14 +5,15 @@ A simple implementation of pong using two ucfk4 boards. Developed by:
 - `Josh Jarvis | `
 
 ## How to Play
-- Set up boards in a dimely lit area close together with ir receivers and
+1. Set up boards in a dimely lit area close together with ir receivers and
   senders facing each other
-- In terminal navigate to the root of the group128 folder
-- Run `make clean program` once for each board
-- Press the navswtich move to game difficulty selection
-- Use the navswitch to select the game difficulty
-- Confirm difficulty by pressing the navswitch
-- Use the navswitch to control your paddle
+2. In terminal navigate to the root of the group128 folder
+3. Run `make clean program` once for each board
+4. Press the navswtich move to game difficulty selection, on either board
+5. Use the navswitch to select the game difficulty
+6. Confirm difficulty by pressing the navswitch
+7. Use the navswitch to control your paddle
+8. Play the game!!
 
 ## The Game
 - The goal of the game is to win by causing the other player to miss the ball
@@ -31,3 +32,14 @@ A simple implementation of pong using two ucfk4 boards. Developed by:
   as the led turning on and the losing board will display `You Lost :(`
 - The game can then be restarted by pressing the navswitch and then re-selecting
   a difficulty
+
+## Game Menu
+1. The game menu fist gives a greeting 'Welcome to pong'
+2. Then with a push of the navswitch you move on to difficulty selection
+3. Once difficulty is confirmed through a push of the navswitch the game will
+   start
+
+### Game Over Menu
+1. A winning or losing message will be displayed
+2. A push of the navswitch you again will move on to difficulty selection
+3. A push of the navswitch will confirm difficulty and restart the game
