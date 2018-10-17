@@ -16,20 +16,15 @@
 
 
 // Defining message code types and direction types used in communication
-// Arbitrary values have been chosen here to represent the different types and
+// Arbitrary values have been chosen here to represent the different codes and
 // directions
 #define WIN_CODE 12
 #define START_CODE 33
 #define BALL_CODE 5
 #define SPEED_CODE 3
-#define NORTH 25
 #define NORTH_EAST 26
 #define EAST 27
 #define SOUTH_EAST 28
-#define SOUTH 29
-#define SOUTH_WEST 30
-#define WEST 31
-#define NORTH_WEST 32
 
 
 // Inlcuding modules used
@@ -86,7 +81,7 @@ void send_ball(boing_state_t ball);
    as a ball y-coordinate and drection if a ball was received.
    @return The data received for the other board
 */
-Data receiveData(void);
+Data data_received(void);
 
 
 /**

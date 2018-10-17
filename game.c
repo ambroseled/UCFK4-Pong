@@ -51,7 +51,7 @@ void game_init(void) {
     comms_init();
     led_init();
     // Turning the led off
-    led_set(0, 0);
+    led_set(BLUE_LED, LED_OFF);
     // Setting the initial state of the game
     game_state = NOT_STARTED;
 }
@@ -85,11 +85,11 @@ void change_states(Game_states new_state) {
     switch (game_state) {
         case PLAYING :
             // Turning the led on
-            led_set(0, 1);
+            led_set(BLUE_LED, LED_ON);
             break;
         case WAITING :
             // Turning the led on
-            led_set(0, 0);
+            led_set(BLUE_LED, LED_OFF);
         default :
             break;
     }
@@ -101,7 +101,7 @@ void change_states(Game_states new_state) {
 */
 void button_task(void) {
     // Chekcing for a button event
-    if (navswitch_push_event_p(4)) {
+    if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
         // Clearing the display
         clear_display();
         switch (game_state) {
@@ -125,7 +125,6 @@ void button_task(void) {
    to the other board. Otherwise the ball postion is updated.
 */
 void ball_task(void) {
-    //TODO Check ball collisons with function in ball module
     if (check_send()) {
         // Sending the ball
         send_ball_pos();
@@ -136,7 +135,7 @@ void ball_task(void) {
             clear_display();
             show_lost();
             send_won();
-            led_set(0, 0);
+            led_set(BLUE_LED, LED_OFF);
             change_states(NOT_STARTED);
         } else {
             ball_update();
@@ -147,15 +146,14 @@ void ball_task(void) {
 
 /**
    Receives data through the ir receiver. If the data recieved matches the
-   defined START_CODE then the game state is changed to PLAYING.
+   defined SPEED_CODE then the game state is changed to PLAYING.
 */
 void check_start(void) {
-    // Receiving data
-    Data data = receiveData();
+    Data received = data_received();
     // Checking if data recieved is a START_CODE
-    if (data.type == SPEED_CODE) {
+    if (received.type == SPEED_CODE) {
         // Clearing the display and changing the game state to PLAYING
-        ball_speed = data.ball_pos;
+        ball_speed = received.ball_pos;
         clear_display();
         reset_ball();
         change_states(PLAYING);
@@ -168,7 +166,7 @@ void check_start(void) {
 */
 void update_index(uint8_t to_add) {
     speed_index += to_add;
-    speed_index = speed_index % 3;
+    speed_index = speed_index % NUM_DIFFICULTIES;
 }
 
 
@@ -181,7 +179,7 @@ void change_speed(void) {
     if (navswitch_push_event_p(NAVSWITCH_NORTH)) {
         update_index(1);
     } else if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
-        update_index(4);
+        update_index(NUM_DIFFICULTIES + 1);
     }
     // Updating new ball speed value
     switch (speed_index) {
@@ -209,26 +207,67 @@ void change_speed(void) {
    passing the ball back to this board.
 */
 void check_ir(void) {
-    // Receiving data
-    Data received = receiveData();
+    Data received = data_received();
     // Checking the type of the recieved data
     switch(received.type) {
         case WIN_CODE :
             // Clearing the display and showing the winning message
             clear_display();
             show_won();
-            led_set(0, 1);
+            led_set(BLUE_LED, LED_ON);
             change_states(NOT_STARTED);
             break;
         case BALL_CODE :
             // Receiving the ball from the other board
-            receiveBall(received.ball_pos, received.ball_dir);
+            receive_ball(received.ball_pos, received.ball_dir);
             // Changing the state t PLAYING
             change_states(PLAYING);
             break;
         default :
             break;
     }
+}
+
+
+/**
+   Performing the required tasks dependent on the passed game state
+   @param state The current state of the game
+   @param ball_tick The tick count for updating the ball
+   @return The new tick count for the ball
+*/
+uint8_t game_tasks(Game_states state, uint8_t ball_tick) {
+    switch(state) {
+        case NOT_STARTED :
+            // Checking for a button press or START_CODE to start the game
+            button_task();
+            check_start();
+            break;
+        case MENU :
+            // Checking for a navswitch push to either change the speed
+            // or start the game
+            change_speed();
+            button_task();
+            // Checking for START_CODE from other board
+            check_start();
+            break;
+        case PLAYING :
+            // If updating ball dependent on the selected ball_speed
+            if (ball_tick >= ball_speed) {
+                ball_task();
+                ball_tick = 0;
+            }
+            // Checking for paddle movement
+            paddle_task();
+            break;
+        case WAITING :
+            // Waiting for a BALL_CODE or WIN_CODE
+            check_ir();
+            // Checking for paddle movement
+            paddle_task();
+            break;
+        break;
+    }
+    return ball_tick;
 }
 
 
@@ -258,37 +297,7 @@ int main(void) {
         }
         // Updating tinygl
         tinygl_update();
-        // Checking the curent game state
-        switch(game_state) {
-            case NOT_STARTED :
-                // Checking for a button press or START_CODE to start the game
-                button_task();
-                check_start();
-                break;
-            case MENU :
-                // Checking for a navswitch push to either change the speed
-                // or start the game
-                change_speed();
-                button_task();
-                // Checking for START_CODE from other board
-                check_start();
-                break;
-            case PLAYING :
-                // If updating ball dependent on the selected ball_speed
-                if (ball_tick >= ball_speed) {
-                    ball_task();
-                    ball_tick = 0;
-                }
-                // Checking for paddle movement
-                paddle_task();
-                break;
-            case WAITING :
-                // Waiting for a BALL_CODE or WIN_CODE
-                check_ir();
-                // Checking for paddle movement
-                paddle_task();
-                break;
-            break;
-        }
+        // Performign tasks bassed on teh current game state
+        ball_tick = game_tasks(game_state, ball_tick);
     }
 }

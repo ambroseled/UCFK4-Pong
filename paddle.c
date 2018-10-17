@@ -21,8 +21,8 @@
 */
 void paddle_init(void) {
     // Setting the initial postions of the paddle
-    tinygl_point_t left = tinygl_point(4, 3);
-    tinygl_point_t right = tinygl_point(4, 2);
+    tinygl_point_t left = tinygl_point(BOTTOM_COLUMN, PADDLE_START_LEFT);
+    tinygl_point_t right = tinygl_point(BOTTOM_COLUMN, PADDLE_START_RIGHT);
     // Intialising the paddle points
     paddle.left = left;
     paddle.right = right;
@@ -36,7 +36,7 @@ void paddle_init(void) {
 */
 void paddle_show(void) {
     // Drawing the paddle
-    tinygl_draw_line(paddle.left, paddle.right, 1);
+    tinygl_draw_line(paddle.left, paddle.right, SHOW_PADDLE);
 }
 
 
@@ -46,14 +46,14 @@ void paddle_show(void) {
 */
 void paddle_move(void) {
     // Removing current paddle
-    tinygl_draw_line(paddle.left, paddle.right, 0);
+    tinygl_draw_line(paddle.left, paddle.right, HIDE_PADDLE);
     // Updating the paddle postion if the navswitch is press
     if (paddle.right.y != MAX_RIGHT && navswitch_push_event_p(NAVSWITCH_NORTH)) {
-        paddle.left.y -= 1;
-        paddle.right.y -= 1;
+        paddle.left.y -= MOVEMENT_INCREMENT;
+        paddle.right.y -= MOVEMENT_INCREMENT;
     } else if (paddle.left.y != MAX_LEFT && navswitch_push_event_p(NAVSWITCH_SOUTH)) {
-        paddle.left.y += 1;
-        paddle.right.y += 1;
+        paddle.left.y += MOVEMENT_INCREMENT;
+        paddle.right.y += MOVEMENT_INCREMENT;
     }
     // Showing the paddle in its new current postion
     paddle_show();
@@ -79,5 +79,5 @@ uint8_t check_ball(tinygl_point_t pos) {
    @return The center y coordinate of the paddle
 */
 uint8_t get_paddle_center(void) {
-    return (paddle.left.y + paddle.right.y) / 2;
+    return (paddle.left.y + paddle.right.y) / PADDLE_WIDTH;
 }

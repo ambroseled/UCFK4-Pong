@@ -88,25 +88,25 @@ void send_ball(boing_state_t ball) {
    as a ball y-coordinate and drection if a ball was received.
    @return The data received for the other board
 */
-Data receiveData(void) {
+Data receive_data(void) {
     // Initializing variable used to receive data
-    Data dataReceived = {0, 0, 0};
+    Data data_received = {0, 0, 0};
     // Checking if ready to recieve data
     if (ir_uart_read_ready_p()) {
         // Receiving data into the dataReceived variable
-        dataReceived.type = ir_uart_getc();
+        data_received.type = ir_uart_getc();
         // Checking if a ball has been recived
-        if (dataReceived.type == BALL_CODE) {
+        if (data_received.type == BALL_CODE) {
             // Getting the y-coordinate and direction of the ball
-            dataReceived.ball_pos = ir_uart_getc();
-            dataReceived.ball_dir = ir_uart_getc();
+            data_received.ball_pos = ir_uart_getc();
+            data_received.ball_dir = ir_uart_getc();
         }
-        if (dataReceived.type == SPEED_CODE) {
-            dataReceived.ball_pos = ir_uart_getc();
+        if (data_received.type == SPEED_CODE) {
+            data_received.ball_pos = ir_uart_getc();
         }
     }
     // Returning the data that was received
-    return dataReceived;
+    return data_received;
 }
 
 

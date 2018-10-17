@@ -24,6 +24,13 @@
 // Defining constants used for the edges of the board
 #define MAX_LEFT 6
 #define MAX_RIGHT 0
+#define BOTTOM_COLUMN 4
+#define PADDLE_START_LEFT 3
+#define PADDLE_START_RIGHT 2
+#define SHOW_PADDLE 1
+#define HIDE_PADDLE 0
+#define MOVEMENT_INCREMENT 1
+#define PADDLE_WIDTH PADDLE_START_LEFT - PADDLE_START_RIGHT + 1
 
 
 /**

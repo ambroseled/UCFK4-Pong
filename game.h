@@ -23,7 +23,10 @@
 #define EASY 90
 #define MEDIUM 75
 #define HARD 45
-
+#define BLUE_LED 0
+#define LED_ON 1
+#define LED_OFF 0
+#define NUM_DIFFICULTIES 3
 
 
 /**

@@ -30,7 +30,7 @@ static boing_state_t ball;
 */
 boing_dir_t get_rand_dir(void) {
     // Generating number
-    uint8_t index = rand() % 2;
+    uint8_t index = rand() % NUM_START_DIRS;
     boing_dir_t dir = DIR_N;
     // Getting direction from index
     switch(index) {
@@ -49,7 +49,7 @@ boing_dir_t get_rand_dir(void) {
    Intialising the state and postion of the ball
 */
 void ball_init(void) {
-    ball = boing_init(4, 3, get_rand_dir());
+    ball = boing_init(BOTTOM_COLUMN, CENTER_ROW, get_rand_dir());
 }
 
 
@@ -58,19 +58,18 @@ void ball_init(void) {
 */
 void ball_update(void) {
     // Removing current ball from ledmat
-    tinygl_draw_point(ball.pos, 0);
+    tinygl_draw_point(ball.pos, BALL_NOT_VISIBLE);
     // Updating ball postion
     ball = boing_update(ball);
     // showing ball in its new postion
-    tinygl_draw_point(ball.pos, 1);
+    tinygl_draw_point(ball.pos, BALL_VISIBLE);
 }
 
 
 /**
    Swithcing the direction of the ball when it hits the paddle
 */
-void paddle_reverse (void)
-{
+void bounce_ball (void) {
   switch(ball.dir) {
     case DIR_SE :
       ball.dir = DIR_SW;
@@ -89,11 +88,11 @@ void paddle_reverse (void)
 */
 void ball_reverse(void) {
     // Removing current ball from ledmat
-    tinygl_draw_point(ball.pos, 0);
+    tinygl_draw_point(ball.pos, BALL_NOT_VISIBLE);
     // Updating ball postion
     ball = boing_reverse(ball);
     // showing ball in its new postion
-    tinygl_draw_point(ball.pos, 1);
+    tinygl_draw_point(ball.pos, BALL_VISIBLE);
 }
 
 
@@ -104,7 +103,7 @@ void ball_reverse(void) {
 */
 uint8_t check_paddle(void) {
     // Checking the ball is on the bottom layer of the ledmat
-    if (ball.pos.x == 4) {
+    if (ball.pos.x == BOTTOM_COLUMN) {
         // Checking if the ball is within the paddle
         if (check_ball(ball.pos)) {
             return 1;
@@ -112,8 +111,8 @@ uint8_t check_paddle(void) {
             // Ball is not within the paddle and the game is over
             return 0;
         }
-        // Checking if the ball is one layer above the paddle
-    } else if (ball.pos.x == 3){
+    // Checking if the ball is one layer above the paddle
+    } else if (ball.pos.x == ABOVE_PADDLE_COLUMN){
         // Checking edge cases where the ball hits the side of the paddle
         if (((paddle.left.y + 1) == ball.pos.y) && ball.dir == DIR_SE) {
             ball_reverse();
@@ -122,7 +121,7 @@ uint8_t check_paddle(void) {
         }
         // Checking if ball is over the paddle
         if (check_ball(ball.pos)) {
-            paddle_reverse();
+            bounce_ball();
         }
     }
     return 1;
@@ -137,7 +136,7 @@ void send_ball_pos(void) {
     // Sending the ball
     send_ball(ball);
     // Removing the ball from the ledmat
-    tinygl_draw_point(ball.pos, 0);
+    tinygl_draw_point(ball.pos, BALL_NOT_VISIBLE);
 }
 
 
@@ -147,9 +146,9 @@ void send_ball_pos(void) {
    @param pos the y coordinate received for the ball
    @param dir the direction received for the ball
 */
-void receiveBall(uint8_t pos, uint8_t dir) {
+void receive_ball(uint8_t pos, uint8_t dir) {
     // Setting x and y postions of the ball
-    ball.pos.x = 0;
+    ball.pos.x = TOP_COLUMN;
     ball.pos.y = pos;
     // setting the direction of the ball
     switch (dir) {
@@ -164,9 +163,8 @@ void receiveBall(uint8_t pos, uint8_t dir) {
             break;
     }
     // Showing the ball on the ledmat
-    tinygl_draw_point(ball.pos, 1);
+    tinygl_draw_point(ball.pos, BALL_VISIBLE);
 }
-
 
 
 /**
@@ -177,7 +175,7 @@ void receiveBall(uint8_t pos, uint8_t dir) {
 */
 uint8_t check_send(void) {
     // Checking if send conditions are met
-    if (ball.pos.x == 0 && (ball.dir == DIR_W || ball.dir == DIR_SW || ball.dir == DIR_NW)) {
+    if (ball.pos.x == TOP_COLUMN && (ball.dir == DIR_W || ball.dir == DIR_SW || ball.dir == DIR_NW)) {
         return 1;
     } else {
         return 0;
@@ -189,7 +187,7 @@ uint8_t check_send(void) {
   Resetting the postion of the ball to default. Used when the game is restarted
 */
 void reset_ball(void) {
-    ball.pos.x = 4;
+    ball.pos.x = BOTTOM_COLUMN;
     // Getting center postion of the paddle
     ball.pos.y = get_paddle_center();
     // Getting random direction

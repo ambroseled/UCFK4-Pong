@@ -15,6 +15,15 @@
 #define BALLTEST_H
 
 
+#define BOTTOM_COLUMN 4
+#define TOP_COLUMN 0
+#define ABOVE_PADDLE_COLUMN 3
+#define CENTER_ROW 3
+#define NUM_START_DIRS 2
+#define BALL_VISIBLE 1
+#define BALL_NOT_VISIBLE 0
+
+
 #include "ball.h"
 
 
@@ -43,7 +52,7 @@ void send_ball_pos(void);
    @param pos the y coordinate received for the ball
    @param dir the direction received for the ball
 */
-void receiveBall(uint8_t pos, uint8_t dir);
+void receive_ball(uint8_t pos, uint8_t dir);
 
 
 /**
