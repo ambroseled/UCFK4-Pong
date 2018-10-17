@@ -1,13 +1,13 @@
 /**
-* Ball module source code
-* @team 128
-* @author Ambrose Ledbrook - 79172462
-* @author Josh Jarvis - 28803714
-* @date 13-oct-2018
-*
-* @brief This module provides the ball functionality to the game through the use  of
-*        the provided api module boing. It includes methods to intialise, update,
-*        send, receive and check collisons for the ball.
+   Ball module source code
+   @team 128
+   @author Ambrose Ledbrook - 79172462
+   @author Josh Jarvis - 28803714
+   @date 13-oct-2018
+
+   @brief This module provides the ball functionality to the game through the use
+          of the provided api module boing. It includes methods to intialise,
+          update, send, receive and check collisons for the ball.
 */
 
 
@@ -24,9 +24,9 @@ static boing_state_t ball;
 
 
 /**
-* Generates a random value between 0 and 1 which corresponds to the directions
-* North west and North east. This is used to make the ball seem more random.
-* @return A random boing_dir_t which is either DIR_NW, DIR_SW
+   Generates a random value between 0 and 1 which corresponds to the directions
+   North west and North east. This is used to make the ball seem more random.
+   @return A random boing_dir_t which is either DIR_NW, DIR_SW
 */
 boing_dir_t get_rand_dir(void) {
     // Generating number
@@ -46,7 +46,7 @@ boing_dir_t get_rand_dir(void) {
 
 
 /**
-* Intialising the state and postion of the ball
+   Intialising the state and postion of the ball
 */
 void ball_init(void) {
     ball = boing_init(4, 3, get_rand_dir());
@@ -54,7 +54,7 @@ void ball_init(void) {
 
 
 /**
-* Updating the postionoof the ball through the use of the boing_update method
+   Updating the postion of the ball through the use of the boing_update method
 */
 void ball_update(void) {
     // Removing current ball from ledmat
@@ -67,7 +67,7 @@ void ball_update(void) {
 
 
 /**
-* Swithcing the direction of the ball when it hits the paddle
+   Swithcing the direction of the ball when it hits the paddle
 */
 void paddle_reverse (void)
 {
@@ -85,7 +85,7 @@ void paddle_reverse (void)
 
 
 /**
-* Reversing the direction os the ball.
+   Reversing the direction os the ball.
 */
 void ball_reverse(void) {
     // Removing current ball from ledmat
@@ -98,9 +98,9 @@ void ball_reverse(void) {
 
 
 /**
-* Used to check if the ball has hit the paddle. Also handling the ball
-* bouncing off the paddle.
-* @return 0 if ball is on back of screen 1 otherwise
+   Used to check if the ball has hit the paddle. Also handling the ball
+   bouncing off the paddle.
+   @return 0 if ball is on back of screen 1 otherwise
 */
 uint8_t check_paddle(void) {
     // Checking the ball is on the bottom layer of the ledmat
@@ -130,8 +130,8 @@ uint8_t check_paddle(void) {
 
 
 /**
-* Sending the postion and direction of the ball to the other board over
-* through the use of the comms module.
+   Sending the postion and direction of the ball to the other board over
+   through the use of the comms module.
 */
 void send_ball_pos(void) {
     // Sending the ball
@@ -142,10 +142,10 @@ void send_ball_pos(void) {
 
 
 /**
-* Processing a ball that was received from the other board. Takes a y-coordinate
-* and a direction and updates the ball to match.
-* @param pos the y coordinate received for the ball
-* @param dir the direction received for the ball
+   Processing a ball that was received from the other board. Takes a y-coordinate
+   and a direction and updates the ball to match.
+   @param pos the y coordinate received for the ball
+   @param dir the direction received for the ball
 */
 void receiveBall(uint8_t pos, uint8_t dir) {
     // Setting x and y postions of the ball
@@ -170,10 +170,10 @@ void receiveBall(uint8_t pos, uint8_t dir) {
 
 
 /**
-* Checking if the ball needs to be sent to the other board. The ball will be
-* sent to the other board if its x-coordinate is 0 which is the top row of the
-* ledmat.
-* @return 1 if the ball is to be sent 0 otherwise
+   Checking if the ball needs to be sent to the other board. The ball will be
+   sent to the other board if its x-coordinate is 0 which is the top row of the
+   ledmat.
+   @return 1 if the ball is to be sent 0 otherwise
 */
 uint8_t check_send(void) {
     // Checking if send conditions are met
@@ -186,7 +186,7 @@ uint8_t check_send(void) {
 
 
 /**
-* Resetting the postion of the ball to default. Used when the game is restarted
+  Resetting the postion of the ball to default. Used when the game is restarted
 */
 void reset_ball(void) {
     ball.pos.x = 4;

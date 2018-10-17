@@ -1,12 +1,12 @@
 /**
-* Comms module source code
-* @team 128
-* @author Ambrose Ledbrook - 79172462
-* @author Josh Jarvis - 28803714
-* @date 09-oct-2018
-*
-* @brief This module provides the ir communication functionality used by the
-*        game to communicate between the two boards.
+   Comms module source code
+   @team 128
+   @author Ambrose Ledbrook - 79172462
+   @author Josh Jarvis - 28803714
+   @date 09-oct-2018
+
+   @brief This module provides the ir communication functionality used by the
+          game to communicate between the two boards.
 */
 
 
@@ -17,7 +17,7 @@
 
 
 /**
-* Intialising the communications for the game
+   Intialising the communications for the game
 */
 void comms_init(void) {
     ir_uart_init();
@@ -25,7 +25,7 @@ void comms_init(void) {
 
 
 /**
-* Sends a code to start the game to the other board
+   Sends a code to start the game to the other board
 */
 void send_start(void) {
     ir_uart_putc(START_CODE);
@@ -33,7 +33,7 @@ void send_start(void) {
 
 
 /**
-* Sending a code to the other board informing it that it won the game
+   Sending a code to the other board informing it that it won the game
 */
 void send_won(void) {
     ir_uart_putc(WIN_CODE);
@@ -41,10 +41,10 @@ void send_won(void) {
 
 
 /**
-* Takes a boing_dir_t of the ball and converts it to a direction code to be
-* sent to the other board.
-* @param ball_dir the boing_dir_t of the ball
-* @return A uint8_t code to send corresponding to the passed boing_dir_t
+   Takes a boing_dir_t of the ball and converts it to a direction code to be
+   sent to the other board.
+   @param ball_dir the boing_dir_t of the ball
+   @return A uint8_t code to send corresponding to the passed boing_dir_t
 */
 uint8_t get_dir(boing_dir_t ball_dir) {
     uint8_t to_send = 0;
@@ -68,9 +68,9 @@ uint8_t get_dir(boing_dir_t ball_dir) {
 
 
 /**
-* Sends the ball to the other board, first a BALL_CODE is sent which is then
-* followed by the y-coordinate and then direction of the ball.
-* @param The game ball
+   Sends the ball to the other board, first a BALL_CODE is sent which is then
+   followed by the y-coordinate and then direction of the ball.
+   @param The game ball
 */
 void send_ball(boing_state_t ball) {
     // Sending a BALL_CODE
@@ -83,10 +83,10 @@ void send_ball(boing_state_t ball) {
 
 
 /**
-* Reciving data from the other board, returns the data received in the form of
-* a Data struct variable, which holds the type of data that was received as well
-* as a ball y-coordinate and drection if a ball was received.
-* @return The data received for the other board
+   Reciving data from the other board, returns the data received in the form of
+   a Data struct variable, which holds the type of data that was received as well
+   as a ball y-coordinate and drection if a ball was received.
+   @return The data received for the other board
 */
 Data receiveData(void) {
     // Initializing variable used to receive data
@@ -111,8 +111,8 @@ Data receiveData(void) {
 
 
 /**
-* Sending the chosen ball speed to the other board
-* @param The speed of the ball
+   Sending the chosen ball speed to the other board
+   @param The speed of the ball
 */
 void send_speed(uint8_t speed) {
     // Sending SPEED_CODE

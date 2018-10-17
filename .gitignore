@@ -5,9 +5,6 @@
 .#*
 \#*
 
-# Compiled Python files.
-*.pyc
-*.pyo
 
 # LaTeX intermediate files.
 *.aux
@@ -16,6 +13,7 @@
 *.ind
 *.lof
 *.toc
+
 
 # Binary files generated during build.
 *.o

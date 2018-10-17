@@ -1,12 +1,12 @@
 /**
-* Game module source code
-* @team 128
-* @author Ambrose Ledbrook - 79172462
-* @author Josh Jarvis - 28803714
-* @date 09-oct-2018
-*
-* @brief This module provides the main functionality of the game, allowing
-*        the two players of the game to actually play the game.
+   Game module source code
+   @team 128
+   @author Ambrose Ledbrook - 79172462
+   @author Josh Jarvis - 28803714
+   @date 09-oct-2018
+
+   @brief This module provides the main functionality of the game, allowing
+          the two players of the game to actually play the game.
 */
 
 
@@ -25,7 +25,7 @@
 
 
 /*
-* Intialises the tinygl module used by the game
+   Intialises the tinygl module used by the game
 */
 void tiny_init(void) {
     // Setting up initial values of the tinygl module
@@ -38,8 +38,8 @@ void tiny_init(void) {
 
 
 /*
-* Intialises the game enviroment and other modules used by the game, while also
-* setting the initial game state
+   Intialises the game enviroment and other modules used by the game, while also
+   setting the initial game state
 */
 void game_init(void) {
     system_init();
@@ -58,7 +58,7 @@ void game_init(void) {
 
 
 /*
-* Handles the movement of the game paddle through the use of the paddle module.
+   Handles the movement of the game paddle through the use of the paddle module.
 */
 void paddle_task(void) {
     paddle_move();
@@ -66,7 +66,7 @@ void paddle_task(void) {
 
 
 /*
-* Clears the display of the ledmat
+   Clears the display of the ledmat
 */
 void clear_display(void) {
     tinygl_clear();
@@ -74,8 +74,8 @@ void clear_display(void) {
 
 
 /**
-* Changes the state of the game to that of the passed state. Also performs
-* initializing tasks for the new state.
+   Changes the state of the game to that of the passed state. Also performs
+   initializing tasks for the new state.
 */
 void change_states(Game_states new_state) {
     // Updating the game state
@@ -97,7 +97,7 @@ void change_states(Game_states new_state) {
 
 
 /**
-* Checks if the button is pressed if so the game state is changed to PLAYING
+   Checks if the button is pressed if so the game state is changed to PLAYING
 */
 void button_task(void) {
     // Chekcing for a button event
@@ -121,8 +121,8 @@ void button_task(void) {
 
 
 /**
-* Checks if the ball has reached the top of the ledmat if so the ball is sent
-* to the other board. Otherwise the ball postion is updated.
+   Checks if the ball has reached the top of the ledmat if so the ball is sent
+   to the other board. Otherwise the ball postion is updated.
 */
 void ball_task(void) {
     //TODO Check ball collisons with function in ball module
@@ -146,8 +146,8 @@ void ball_task(void) {
 
 
 /**
-* Receives data through the ir receiver. If the data recieved matches the
-* defined START_CODE then the game state is changed to PLAYING.
+   Receives data through the ir receiver. If the data recieved matches the
+   defined START_CODE then the game state is changed to PLAYING.
 */
 void check_start(void) {
     // Receiving data
@@ -164,7 +164,7 @@ void check_start(void) {
 
 
 /**
-*
+   Updates the index of the selected difficulty by a passed value
 */
 void update_index(uint8_t to_add) {
     speed_index += to_add;
@@ -173,14 +173,17 @@ void update_index(uint8_t to_add) {
 
 
 /**
-*
+   Updates the selected ball speed on a NAVSWITCH_NORTH or NAVSWITCH_SOUTH push
+   event.
 */
 void change_speed(void) {
+    // Checking for navswitch_push_event_p and updating index as required
     if (navswitch_push_event_p(NAVSWITCH_NORTH)) {
         update_index(1);
     } else if (navswitch_push_event_p(NAVSWITCH_SOUTH)) {
         update_index(4);
     }
+    // Updating new ball speed value
     switch (speed_index) {
         case 0 :
             ball_speed = EASY;
@@ -194,15 +197,16 @@ void change_speed(void) {
         default :
             break;
     }
+    // Showing the newly selected speed on the ledmat
     show_speed(speed_index);
 }
 
 
 /**
-* This method receives data through the ir receiver. It then checks if the
-* received data is any of the expected values, a WIN_CODE or a BALL_CODE.
-* Corresponding to either a notification that this board has won the game or
-* passing the ball back to this board.
+   This method receives data through the ir receiver. It then checks if the
+   received data is any of the expected values, a WIN_CODE or a BALL_CODE.
+   Corresponding to either a notification that this board has won the game or
+   passing the ball back to this board.
 */
 void check_ir(void) {
     // Receiving data
@@ -228,9 +232,9 @@ void check_ir(void) {
 }
 
 
-//TODO Docstring this
-/*
-* Runs the game
+/**
+   This method runs the game. Different sets of tasks are performed dependent
+   on the current game_state.
 */
 int main(void) {
     // Initializing the game enviroment and used modules
@@ -247,8 +251,7 @@ int main(void) {
         // Incrementing ticks
         game_tick++;
         ball_tick++;
-        // Updating button and navswitch at 20 hertz
-        //TODO Check this and change BUTTON_RATE
+        // Updating navswitch
         if (game_tick == (PACER_RATE / BUTTON_RATE)) {
             navswitch_update();
             game_tick = 0;
@@ -258,17 +261,20 @@ int main(void) {
         // Checking the curent game state
         switch(game_state) {
             case NOT_STARTED :
-                // chekcing for a button press or START_CODE to start the game
+                // Checking for a button press or START_CODE to start the game
                 button_task();
                 check_start();
                 break;
             case MENU :
+                // Checking for a navswitch push to either change the speed
+                // or start the game
                 change_speed();
                 button_task();
+                // Checking for START_CODE from other board
                 check_start();
                 break;
             case PLAYING :
-                // If updating ball every 50 game ticks
+                // If updating ball dependent on the selected ball_speed
                 if (ball_tick >= ball_speed) {
                     ball_task();
                     ball_tick = 0;

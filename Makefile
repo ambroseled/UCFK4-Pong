@@ -2,7 +2,8 @@
 # Author: Ambrose Ledbrook - 79172462
 # Author: Josh Jarvis - 28803714
 # Date:  04-oct-2018
-# Descr:  Makefile for Pong Game
+# Descr:  Makefile for Pong
+
 
 # Definitions.
 CC = avr-gcc
@@ -22,9 +23,6 @@ game.o: game.c ../../drivers/avr/system.h ../../utils/tinygl.h paddle.h ../../ut
 
 paddle.o: paddle.c ../../drivers/avr/system.h ../../utils/tinygl.h ../../drivers/navswitch.h ../../utils/tinygl.h paddle.h
 	$(CC) -c $(CFLAGS) $< -o $@
-
-#ball3.o: ball3.c ../../drivers/avr/system.h ../../drivers/display.h ../../utils/font.h ../../utils/pacer.h ../../utils/tinygl.h
-	#$(CC) -c $(CFLAGS) $< -o $@
 
 messages.o: messages.c ../../utils/tinygl.h messages.h
 	$(CC) -c $(CFLAGS) $< -o $@
@@ -81,12 +79,8 @@ boing.o: ../../utils/boing.c ../../drivers/avr/system.h ../../utils/tinygl.h ../
 	$(CC) -c $(CFLAGS) $< -o $@
 
 
-
-
 # Link: create ELF output file from object files.
 game.out: game.o paddle.o system.o display.o ledmat.o font.o tinygl.o pio.o navswitch.o pacer.o timer.o messages.o comms.o ir_uart.o timer0.o usart1.o prescale.o led.o ball.o boing.o
-
-
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 

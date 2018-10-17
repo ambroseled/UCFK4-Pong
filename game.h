@@ -1,12 +1,12 @@
 /**
-* Game module header file
-* @team 128
-* @author Ambrose Ledbrook - 79172462
-* @author Josh Jarvis - 28803714
-* @date 12-oct-2018
-*
-* @brief This module header provides the constants and types used by the game
-*        module.
+   Game module header file
+   @team 128
+   @author Ambrose Ledbrook - 79172462
+   @author Josh Jarvis - 28803714
+   @date 12-oct-2018
+
+   @brief This module header provides the constants and types used by the game
+          module.
 */
 
 
@@ -27,7 +27,7 @@
 
 
 /**
-* This enum holds all possible states that the game can be in
+   This enum holds all possible states that the game can be in
 */
 typedef enum {
     // Game is either over or hasn't started

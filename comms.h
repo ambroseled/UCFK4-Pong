@@ -1,12 +1,12 @@
 /**
-* Comms module header file
-* @team 128
-* @author Ambrose Ledbrook - 79172462
-* @author Josh Jarvis - 28803714
-* @date 09-oct-2018
-*
-* @brief This module header provides the ir communication functionality to other
-*        modules of the game that require it.
+   Comms module header file
+   @team 128
+   @author Ambrose Ledbrook - 79172462
+   @author Josh Jarvis - 28803714
+   @date 09-oct-2018
+
+   @brief This module header provides the ir communication functionality to other
+          modules of the game that require it.
 */
 
 
@@ -38,8 +38,8 @@
 
 
 /**
-* The data strucutre that is used to receive data from the other board. It holds
-* a message type as well as a ball y-coordinate and ball direction.
+   The data strucutre that is used to receive data from the other board. It holds
+   a message type as well as a ball y-coordinate and ball direction.
 */
 typedef struct data_s {
     // Message type
@@ -55,42 +55,42 @@ typedef struct data_s {
 
 
 /**
-* Intialising the communications for the game
+   Intialising the communications for the game
 */
 void comms_init(void);
 
 
 /**
-* Sends a code to start the game to the other board
+   Sends a code to start the game to the other board
 */
 void send_start(void);
 
 
 /**
-* Sending a code to the other board informing it that it won the game
+   Sending a code to the other board informing it that it won the game
 */
 void send_won(void);
 
 
 /**
-* Sends the ball to the other board, first a BALL_CODE is sent which is then
-* followed by the y-coordinate and then direction of the ball.
-* @param The game ball
+   Sends the ball to the other board, first a BALL_CODE is sent which is then
+   followed by the y-coordinate and then direction of the ball.
+   @param The game ball
 */
 void send_ball(boing_state_t ball);
 
 
 /**
-* Reciving data from the other board, returns the data received in the form of
-* a Data struct variable, which holds the type of data that was received as well
-* as a ball y-coordinate and drection if a ball was received.
-* @return The data received for the other board
+   Reciving data from the other board, returns the data received in the form of
+   a Data struct variable, which holds the type of data that was received as well
+   as a ball y-coordinate and drection if a ball was received.
+   @return The data received for the other board
 */
 Data receiveData(void);
 
 
 /**
-* Sending the chosen ball speed to the other board
-* @param The speed of the ball
+   Sending the chosen ball speed to the other board
+   @param The speed of the ball
 */
 void send_speed(uint8_t speed);
