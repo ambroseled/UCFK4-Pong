@@ -16,6 +16,11 @@ A simple implementation of pong using two ucfk4. Developed by:
 8. Use the navswitch to control your paddle
 9. Play the game!!
 
+### group128 Folder Location
+- The `MakeFile` of the game relies on the `group128` folder being two directories
+  down from the `drivers`, `utils` and `fonts` folders that are porvided in
+  the `ence260-ucfk4` repository
+
 ## The Game
 - The goal of the game is to win by causing the other player to miss the ball
 - Use your paddle to bounce the ball back onto the other players screen and
