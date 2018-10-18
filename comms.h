@@ -4,7 +4,6 @@
    @author Ambrose Ledbrook - 79172462
    @author Josh Jarvis - 28803714
    @date 09-oct-2018
-
    @brief This module header provides the ir communication functionality to other
           modules of the game that require it.
 */
@@ -81,7 +80,7 @@ void send_ball(boing_state_t ball);
    as a ball y-coordinate and drection if a ball was received.
    @return The data received for the other board
 */
-Data data_received(void);
+Data receive_data(void);
 
 
 /**

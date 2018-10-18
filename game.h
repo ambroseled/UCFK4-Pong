@@ -15,7 +15,7 @@
 #define GAME_H
 
 
-// Defining rate constants used in the game
+// Defining constant values used
 #define PACER_RATE 300
 #define MESSAGE_RATE 15
 #define BUTTON_RATE 300

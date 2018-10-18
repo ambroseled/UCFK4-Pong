@@ -1,6 +1,6 @@
 # ENCE260 UCFK4 Assignment - Pong
 
-A simple implementation of pong using two ucfk4 boards. Developed by:
+A simple implementation of pong using two ucfk4. Developed by:
 - `Ambrose Ledbrook | 79172462`
 - `Josh Jarvis | 28803714`
 
@@ -11,7 +11,7 @@ A simple implementation of pong using two ucfk4 boards. Developed by:
 3. Run `make clean program` once for each board
 4. Press the navswtich move to game difficulty selection, on either board
 5. Use the navswitch to select the game difficulty
-6. Confirm difficulty by pressing the navswitch
+6. Confirm difficulty and start the game by pressing the navswitch
 7. Use the navswitch to control your paddle
 8. Play the game!!
 
@@ -21,19 +21,19 @@ A simple implementation of pong using two ucfk4 boards. Developed by:
   stop it from hitting the back of your screen
 - The active player will be indicated by the blue led
 
-## Game Difficulty
+### Game Difficulty
 - The game has 3 different difficulty levels
     * Easy - 1
     * Medium - 2
     * Hard - 3
 
-## Winning / Losing the Game
+### Winning / Losing the Game
 - When the game is over the winner's boad will display `You Won!! :)` as well
   as the led turning on and the losing board will display `You Lost :(`
 - The game can then be restarted by pressing the navswitch and then re-selecting
   a difficulty
 
-## Game Menu
+## The Game Menu
 1. The game menu first gives a greeting `Welcome to pong`
 2. Then with a push of the navswitch you move on to difficulty selection
 3. Once difficulty is confirmed through a push of the navswitch the game will

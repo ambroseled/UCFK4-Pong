@@ -4,7 +4,6 @@
    @author Ambrose Ledbrook - 79172462
    @author Josh Jarvis - 28803714
    @date 13-oct-2018
-
    @brief This module provides the ball functionality to the game through the use
           of the provided api module boing. It includes methods to intialise,
           update, send, receive and check collisons for the ball.
@@ -16,10 +15,11 @@
 #include "tinygl.h"
 #include "comms.h"
 #include "paddle.h"
+#include "ball.h"
 #include <stdlib.h>
 
 
-// boing_state_t variable which holds the postion and direction of the ball
+// A boing_state_t variable which holds the postion and direction of the ball
 static boing_state_t ball;
 
 
@@ -70,16 +70,16 @@ void ball_update(void) {
    Swithcing the direction of the ball when it hits the paddle
 */
 void bounce_ball (void) {
-  switch(ball.dir) {
-    case DIR_SE :
-      ball.dir = DIR_SW;
-      break;
-    case DIR_NE :
-      ball.dir = DIR_NW;
-      break;
-    default :
-      break;
-  }
+    switch(ball.dir) {
+        case DIR_SE :
+            ball.dir = DIR_SW;
+            break;
+        case DIR_NE :
+            ball.dir = DIR_NW;
+            break;
+        default :
+            break;
+    }
 }
 
 
@@ -112,7 +112,7 @@ uint8_t check_paddle(void) {
             return 0;
         }
     // Checking if the ball is one layer above the paddle
-    } else if (ball.pos.x == ABOVE_PADDLE_COLUMN){
+    } else if (ball.pos.x == ABOVE_PADDLE_COLUMN) {
         // Checking edge cases where the ball hits the side of the paddle
         if (((paddle.left.y + 1) == ball.pos.y) && ball.dir == DIR_SE) {
             ball_reverse();

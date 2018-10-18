@@ -4,7 +4,6 @@
    @author Ambrose Ledbrook - 79172462
    @author Josh Jarvis - 28803714
    @date 13-oct-2018
-
    @brief This module header provides the ball functionality to the game to other
           modules that require it
 */
@@ -15,6 +14,7 @@
 #define BALLTEST_H
 
 
+// Defineing constants used throughout the ball module
 #define BOTTOM_COLUMN 4
 #define TOP_COLUMN 0
 #define ABOVE_PADDLE_COLUMN 3

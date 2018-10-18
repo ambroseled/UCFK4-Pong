@@ -4,7 +4,6 @@
    @author Ambrose Ledbrook - 79172462
    @author Josh Jarvis - 28803714
    @date 06-oct-2018
-
    @brief This module header provides the functionality of the players paddle to
          the game module.
 */

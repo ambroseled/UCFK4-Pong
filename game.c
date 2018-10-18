@@ -4,7 +4,6 @@
    @author Ambrose Ledbrook - 79172462
    @author Josh Jarvis - 28803714
    @date 09-oct-2018
-
    @brief This module provides the main functionality of the game, allowing
           the two players of the game to actually play the game.
 */
@@ -42,6 +41,7 @@ void tiny_init(void) {
    setting the initial game state
 */
 void game_init(void) {
+    // Initializing used modules
     system_init();
     ball_init();
     navswitch_init();
@@ -149,7 +149,7 @@ void ball_task(void) {
    defined SPEED_CODE then the game state is changed to PLAYING.
 */
 void check_start(void) {
-    Data received = data_received();
+    Data received = receive_data();
     // Checking if data recieved is a START_CODE
     if (received.type == SPEED_CODE) {
         // Clearing the display and changing the game state to PLAYING
@@ -207,7 +207,7 @@ void change_speed(void) {
    passing the ball back to this board.
 */
 void check_ir(void) {
-    Data received = data_received();
+    Data received = receive_data();
     // Checking the type of the recieved data
     switch(received.type) {
         case WIN_CODE :
