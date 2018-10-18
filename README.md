@@ -41,5 +41,5 @@ A simple implementation of pong using two ucfk4. Developed by:
 
 ### Game Over Menu
 1. A winning or losing message will be displayed
-2. A push of the navswitch you again will move on to difficulty selection
-3. A push of the navswitch will confirm difficulty and restart the game
+2. A push of the navswitch will again move you to difficulty selection
+3. Another push of the navswitch will confirm difficulty and restart the game
