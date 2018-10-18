@@ -20,6 +20,8 @@ A simple implementation of pong using two ucfk4. Developed by:
 - The `MakeFile` of the game relies on the `group128` folder being two directories
   down from the `drivers`, `utils` and `fonts` folders that are porvided in
   the `ence260-ucfk4` repository
+- When running the game please ensure that the `group128` folder is in the
+  above location
 
 ## The Game
 - The goal of the game is to win by causing the other player to miss the ball
