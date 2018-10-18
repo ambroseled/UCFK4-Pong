@@ -8,12 +8,13 @@ A simple implementation of pong using two ucfk4. Developed by:
 1. Set up boards in a dimely lit area close together with ir receivers and
   senders facing each other
 2. In terminal navigate to the root of the group128 folder
-3. Run `make clean program` once for each board
-4. Press the navswtich move to game difficulty selection, on either board
-5. Use the navswitch to select the game difficulty
-6. Confirm difficulty and start the game by pressing the navswitch
-7. Use the navswitch to control your paddle
-8. Play the game!!
+3. Run `make clean`
+4. Then run `make program` twice
+5. Press the navswtich move to game difficulty selection, on either board
+6. Use the navswitch to select the game difficulty
+7. Confirm difficulty and start the game by pressing the navswitch
+8. Use the navswitch to control your paddle
+9. Play the game!!
 
 ## The Game
 - The goal of the game is to win by causing the other player to miss the ball
@@ -22,7 +23,7 @@ A simple implementation of pong using two ucfk4. Developed by:
 - The active player will be indicated by the blue led
 
 ### Game Difficulty
-- The game has 3 different difficulty levels
+- The game has 3 difficulty levels which relate to the speed of the ball
     * Easy - 1
     * Medium - 2
     * Hard - 3
@@ -30,14 +31,14 @@ A simple implementation of pong using two ucfk4. Developed by:
 ### Winning / Losing the Game
 - When the game is over the winner's boad will display `You Won!! :)` as well
   as the led turning on and the losing board will display `You Lost :(`
-- The game can then be restarted by pressing the navswitch and then re-selecting
-  a difficulty
+- The game menu can then be reached through a press of the navswitch from either
+  board
 
 ## The Game Menu
 1. The game menu first gives a greeting `Welcome to pong`
 2. Then with a push of the navswitch you move on to difficulty selection
-3. Once difficulty is confirmed through a push of the navswitch the game will
-   start
+3. The navswitch can be used to cycle through the different difficulty levels
+4. A push of the navswitch will confirm the difficulty and start the game
 
 ### Game Over Menu
 1. A winning or losing message will be displayed
