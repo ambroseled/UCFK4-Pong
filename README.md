@@ -4,6 +4,9 @@ A simple implementation of pong using two ucfk4. Developed by:
 - `Ambrose Ledbrook | 79172462`
 - `Josh Jarvis | 28803714`
 
+The drivers required for this game to run are not provided here.
+All drivers needed and a copy of the game is provided here: https://github.com/ambroseled/UCFK4-Apps
+
 ## Usage
 1. Set up boards in a dimely lit area close together with ir receivers and
   senders facing each other
