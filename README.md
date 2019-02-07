@@ -1,6 +1,6 @@
 # ENCE260 UCFK4 Assignment - Pong
 
-A simple implementation of pong using two ucfk4. Developed by:
+A simple implementation of pong using two ucfk4, written as a pair assigment for ENCE260-18 achieving an A grade. Developed by:
 - `Ambrose Ledbrook | 79172462`
 - `Josh Jarvis | 28803714`
 
